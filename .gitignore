@@ -42,6 +42,7 @@ ENV/
 htmlcov/
 .tox/
 .nox/
+tmp/
 
 # mypy
 .mypy_cache/
