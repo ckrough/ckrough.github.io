@@ -1,0 +1,121 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+---
+
+<BaseLayout
+  title="Projects - Chris Krough"
+  description="RAG systems, document classification, AI development tools, and open source contributions. Production AI implementations and platform engineering work."
+>
+  <!-- Hero Section -->
+  <Hero
+    headline="Projects"
+    subheadline="AI systems, development tools, and open source contributions."
+  />
+
+  <!-- Featured Projects -->
+  <section class="section-spacing">
+    <div class="container-custom">
+      <div class="max-w-4xl mx-auto space-y-8">
+        <!-- Retriever (Featured) -->
+        <ProjectCard
+          name="Retriever"
+          description="RAG-powered Q&A system with source citations and answer verification. Includes evaluation framework to measure retrieval quality over time. Document ingestion, vector search, and LLM-based synthesis."
+          techStack={['Python', 'Vector DB', 'FastAPI', 'OpenAI', 'Anthropic']}
+          githubUrl="https://github.com/ckrough/retriever"
+          featured={true}
+        />
+
+        <!-- Drover -->
+        <ProjectCard
+          name="Drover"
+          description="AI-powered document classification using LLMs. Automatically categorizes and routes documents based on content. Supports multiple LLM providers (Ollama, OpenAI, Anthropic) with configurable classification taxonomies and confidence thresholds."
+          techStack={['Python', 'FastAPI', 'Ollama', 'OpenAI', 'Anthropic', 'Pydantic']}
+          githubUrl="https://github.com/ckrough/drover"
+        />
+
+        <!-- Agentspaces -->
+        <ProjectCard
+          name="Agentspaces"
+          description="Agentic development environment for managing multi-agent AI workflows. Isolated worktrees, dependency management, and CI integration. Production tooling for complex AI-assisted development projects requiring context persistence across sessions."
+          techStack={['Python', 'Git Worktrees', 'Claude AI', 'CLI Tools']}
+        />
+
+        <!-- Team of Rivals -->
+        <ProjectCard
+          name="Team of Rivals"
+          description="Claude AI Skill Showcase: Strategic decision-assistance framework inspired by Abraham Lincoln's 'Team of Rivals' approach, implemented as Claude AI Skills. Get diverse, adversarial perspectives on your decisions instead of a single AI viewpoint."
+          techStack={['Markdown', 'Claude Skills', 'AI Agents']}
+          githubUrl="https://github.com/ckrough/team-of-rivals"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Open Source Contributions -->
+  <section class="section-spacing bg-surface">
+    <div class="container-custom">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-h2 font-heading font-bold text-structure mb-8 text-center">
+          Open Source Contributions
+        </h2>
+
+        <div class="space-y-4">
+          <div class="border-l-4 border-accent pl-6 py-2">
+            <h3 class="text-h4 font-heading font-bold text-structure mb-1">
+              AWS Service Operator
+            </h3>
+            <p class="text-base text-muted">
+              Lets you define and use AWS service resources directly from Kubernetes
+            </p>
+          </div>
+
+          <div class="border-l-4 border-accent pl-6 py-2">
+            <h3 class="text-h4 font-heading font-bold text-structure mb-1">
+              AWS VPN Controller
+            </h3>
+            <p class="text-base text-muted">
+              Kubernetes controller for AWS VPN management
+            </p>
+          </div>
+
+          <div class="border-l-4 border-accent pl-6 py-2">
+            <h3 class="text-h4 font-heading font-bold text-structure mb-1">
+              AWS EKS Cluster Controller
+            </h3>
+            <p class="text-base text-muted">
+              Early stage EKS clusters and Kubernetes resource lifecycle management.
+            </p>
+          </div>
+        </div>
+
+        <div class="mt-8 text-center">
+          <p class="text-sm text-muted mb-4">
+            Amazon era (2014-2018): AWS Labs, 150+ Kubernetes clusters across 3
+            continents
+          </p>
+          <a
+            href="https://github.com/ckrough"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 text-structure font-medium hover:text-accent transition-colors"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                clip-rule="evenodd"></path>
+            </svg>
+            View GitHub Profile
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
