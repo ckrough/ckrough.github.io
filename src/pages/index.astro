@@ -1,0 +1,170 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Card from '../components/Card.astro';
+---
+
+<BaseLayout
+  title="Chris Krough - Engineering Leader | Platform Architecture | AI Transformation"
+  description="20 years engineering leadership. 2 IPOs, 4 acquisitions. AI transformation, platform engineering, and technical due diligence."
+>
+  <!-- Hero Section -->
+  <Hero
+    headline="Chris Krough"
+    subheadline="Engineering Leadership | Platform Architecture | AI Transformation"
+  />
+
+  <!-- Positioning Statement -->
+  <section class="section-spacing bg-foundation">
+    <div class="container-custom">
+      <p class="text-2xl md:text-3xl font-heading text-structure leading-relaxed max-w-4xl mx-auto text-center">
+        I've led engineering organizations through acquisitions and IPOs. Now I help
+        organizations figure out where AI works for them.
+      </p>
+    </div>
+  </section>
+
+  <!-- Proof Points -->
+  <section class="section-spacing"> 
+    <div class="container-custom">
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <Card variant="elevated">
+          <div class="text-center">
+            <p class="text-4xl font-heading font-bold text-accent mb-2">25+</p>
+            <p class="text-sm font-medium text-muted uppercase tracking-wide">
+              Years Experience
+            </p>
+          </div>
+        </Card>
+
+        <Card variant="elevated">
+          <div class="text-center">
+            <p class="text-4xl font-heading font-bold text-accent mb-2">2</p>
+            <p class="text-sm font-medium text-muted uppercase tracking-wide">
+              IPOs
+            </p>
+          </div>
+        </Card>
+
+        <Card variant="elevated">
+          <div class="text-center">
+            <p class="text-4xl font-heading font-bold text-accent mb-2">4</p>
+            <p class="text-sm font-medium text-muted uppercase tracking-wide">
+              Acquisitions
+            </p>
+          </div>
+        </Card>
+
+        <Card variant="elevated">
+          <div class="text-center">
+            <p class="text-4xl font-heading font-bold text-accent mb-2">$3B+</p>
+            <p class="text-sm font-medium text-muted uppercase tracking-wide">
+              In Transactions
+            </p>
+          </div>
+        </Card>
+      </div>
+
+      <div class="mt-12 text-center">
+        <p class="text-xl text-structure max-w-3xl mx-auto">
+          Track record supporting rapid growth and transformation across engineering organizations, M&A technical due diligence, and AI transformation
+          initiatives.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Current Focus -->
+  <section class="section-spacing bg-surface">
+    <div class="container-custom">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-h2 font-heading font-bold text-structure mb-8 text-center">
+          Current Focus
+        </h2>
+
+        <Card variant="bordered">
+          <div class="space-y-4">
+            <h3 class="text-h3 font-heading font-bold text-structure">
+              AI Transformation Consulting
+            </h3>
+            <p class="text-lg text-structure leading-relaxed">
+              Through <a
+                href="https://faberworks.io"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-accent hover:underline font-medium">Faberworks</a
+              >, I help organizations identify high-value AI opportunities and build
+              production systems that work.
+            </p>
+
+            <div class="space-y-2">
+              <p class="text-base text-muted">
+                <span class="text-accent font-medium">Building:</span> RAG systems,
+                LLM evaluation frameworks, intelligent automation
+              </p>
+              <p class="text-base text-muted">
+                <span class="text-accent font-medium">Focus:</span> Finding where AI
+                actually works, not just where it's trendy
+              </p>
+            </div>
+
+            <div class="pt-4">
+              <a href="/services" class="btn-primary">
+                View Services
+              </a>
+              <a
+                href="/projects"
+                class="inline-block ml-4 text-structure font-medium hover:text-accent transition-colors"
+              >
+                See Projects →
+              </a>
+            </div>
+          </div>
+        </Card>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Navigation -->
+  <section class="section-spacing">
+    <div class="container-custom">
+      <div class="grid md:grid-cols-3 gap-6">
+        <a href="/services" class="group">
+          <Card variant="elevated">
+            <h3 class="text-h4 font-heading font-bold text-structure group-hover:text-accent transition-colors mb-2">
+              Services
+            </h3>
+            <p class="text-base text-muted">
+              AI transformation, platform engineering, M&A due diligence, and engineering
+              leadership
+            </p>
+          </Card>
+        </a>
+
+        <a href="/projects" class="group">
+          <Card variant="elevated">
+            <h3 class="text-h4 font-heading font-bold text-structure group-hover:text-accent transition-colors mb-2">
+              Projects
+            </h3>
+            <p class="text-base text-muted">
+              RAG systems, document classification, development tools, and open source
+              contributions
+            </p>
+          </Card>
+        </a>
+
+        <a href="/experience" class="group">
+          <Card variant="elevated">
+            <h3 class="text-h4 font-heading font-bold text-structure group-hover:text-accent transition-colors mb-2">
+              Experience
+            </h3>
+            <p class="text-base text-muted">
+              Faberworks, Houseful/RBCx, OJO Labs, Amazon, and more. 20 years of
+              engineering leadership
+            </p>
+          </Card>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

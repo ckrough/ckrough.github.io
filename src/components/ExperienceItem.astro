@@ -1,0 +1,52 @@
+---
+interface Props {
+  company: string;
+  role: string;
+  dates: string;
+  outcomes: string[];
+  current?: boolean;
+}
+
+const { company, role, dates, outcomes, current = false } = Astro.props;
+---
+
+<div class="relative pl-8 pb-12 last:pb-0">
+  <!-- Timeline dot -->
+  <div
+    class={`absolute left-0 top-2 w-3 h-3 rounded-full ${
+      current ? 'bg-accent' : 'bg-muted'
+    }`}
+  >
+  </div>
+
+  <!-- Timeline line -->
+  <div class="absolute left-[5px] top-5 bottom-0 w-0.5 bg-border last:hidden">
+  </div>
+
+  <!-- Content -->
+  <div class="space-y-2">
+    <div class="flex flex-col md:flex-row md:items-baseline md:justify-between gap-2">
+      <h3 class="text-h4 font-heading font-bold text-structure">
+        {company}
+      </h3>
+      <span class="text-sm text-muted font-medium">
+        {dates}
+      </span>
+    </div>
+
+    <p class="text-base text-structure font-medium">
+      {role}
+    </p>
+
+    {outcomes.length > 0 && (
+      <ul class="space-y-1 mt-3">
+        {outcomes.map((outcome) => (
+          <li class="text-base text-muted flex items-start">
+            <span class="text-accent mr-2 flex-shrink-0">•</span>
+            <span>{outcome}</span>
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+</div>

@@ -1,0 +1,36 @@
+---
+interface Props {
+  headline: string;
+  subheadline?: string;
+  ctaText?: string;
+  ctaLink?: string;
+}
+
+const { headline, subheadline, ctaText, ctaLink } = Astro.props;
+---
+
+<section
+  class="relative py-2xl md:py-3xl bg-gradient-to-br from-foundation via-surface to-foundation"
+>
+  <div class="container-custom">
+    <div class="max-w-3xl">
+      <h1 class="text-h1 font-heading font-bold text-structure mb-6 text-balance">
+        {headline}
+      </h1>
+      {
+        subheadline && (
+          <p class="text-xl md:text-2xl text-muted mb-8 max-w-2xl">
+            {subheadline}
+          </p>
+        )
+      }
+      {
+        ctaText && ctaLink && (
+          <a href={ctaLink} class="btn-primary">
+            {ctaText}
+          </a>
+        )
+      }
+    </div>
+  </div>
+</section>
