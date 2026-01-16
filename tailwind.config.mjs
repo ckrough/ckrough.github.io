@@ -7,9 +7,9 @@ export default {
         // Brand colors from VISUAL-IDENTITY.md
         foundation: '#F5F0E8',    // Warm cream - backgrounds
         surface: '#FAFAF8',        // Warm white - cards
-        shadow: '#2A2A28',         // Deep shadow - dark sections
-        structure: '#3D3D3D',      // Charcoal - text, headers
-        muted: '#6B6B6B',          // Muted gray - secondary text
+        shadow: '#50636F',         // Blue gray - dark sections
+        structure: '#41423D',      // Charcoal - text, headers
+        muted: '#223342',          // Muted - secondary text
         accent: '#E07A5F',         // Burnt coral - CTAs, highlights
         border: '#E5E5E5',         // Light gray - dividers
       },
@@ -34,8 +34,8 @@ export default {
         'h4': ['1.25rem', { lineHeight: '1.4' }],   // 20px
       },
       boxShadow: {
-        'card': '0 2px 8px rgba(61, 61, 61, 0.08)',
-        'card-hover': '0 4px 16px rgba(61, 61, 61, 0.12)',
+        'card': '0 2px 8px rgba(65, 66, 61, 0.08)',
+        'card-hover': '0 4px 16px rgba(65, 66, 61, 0.12)',
       },
     },
   },

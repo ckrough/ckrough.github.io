@@ -1,5 +1,5 @@
 /* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600&display=swap');
 
 /* Tailwind base, components, and utilities */
 @tailwind base;
@@ -10,13 +10,13 @@
 :root {
   /* Primary Palette */
   --color-foundation: #F5F0E8;     /* Warm cream - backgrounds */
-  --color-structure: #3D3D3D;      /* Charcoal - text, headers */
+  --color-structure: #41423D;      /* Charcoal - text, headers */
   --color-accent: #E07A5F;         /* Burnt coral - CTAs, highlights */
 
   /* Supporting */
   --color-surface: #FAFAF8;        /* Warm white - cards */
-  --color-shadow: #2A2A28;         /* Deep shadow - dark mode */
-  --color-muted: #6B6B6B;          /* Muted gray - secondary text */
+  --color-shadow: #50636F;         /* Blue gray - dark sections */
+  --color-muted: #223342;          /* Muted - secondary text */
   --color-border: #E5E5E5;         /* Light gray - dividers */
 
   /* Semantic Aliases */
