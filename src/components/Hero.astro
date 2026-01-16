@@ -7,18 +7,32 @@ interface Props {
 }
 
 const { headline, subheadline, ctaText, ctaLink } = Astro.props;
+
+// Split subheadline by | for smart wrapping (each phrase stays together)
+const subheadlineParts = subheadline?.includes('|')
+  ? subheadline.split('|').map(s => s.trim())
+  : null;
 ---
 
 <section
   class="relative py-2xl md:py-3xl bg-gradient-to-br from-foundation via-surface to-foundation"
 >
   <div class="container-custom">
-    <div class="max-w-3xl">
+    <div class="max-w-4xl">
       <h1 class="text-h1 font-heading font-bold text-structure mb-6 text-balance">
         {headline}
       </h1>
       {
-        subheadline && (
+        subheadlineParts ? (
+          <p class="text-xl md:text-2xl text-muted mb-8">
+            {subheadlineParts.map((part, i) => (
+              <>
+                <span class="whitespace-nowrap">{part}</span>
+                {i < subheadlineParts.length - 1 && <span class="mx-1">|</span>}
+              </>
+            ))}
+          </p>
+        ) : subheadline && (
           <p class="text-xl md:text-2xl text-muted mb-8 max-w-2xl">
             {subheadline}
           </p>
