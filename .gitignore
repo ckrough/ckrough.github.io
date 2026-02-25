@@ -22,6 +22,7 @@ Thumbs.db
 *.local
 
 # Keep beads/claude/agentspace
-!.beads/
 !.claude/
 !.agentspace/
+
+.beads/
