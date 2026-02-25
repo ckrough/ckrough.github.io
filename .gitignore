@@ -20,5 +20,3 @@ Thumbs.db
 .env
 .env.local
 *.local
-
-.beads/
