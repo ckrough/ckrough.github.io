@@ -1,5 +1,5 @@
 /* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;500;600;700&display=swap');
 
 /* Tailwind base, components, and utilities */
 @tailwind base;
@@ -8,16 +8,16 @@
 
 /* CSS Variables for colors and spacing */
 :root {
-  /* Primary Palette */
-  --color-foundation: #F5F0E8;     /* Warm cream - backgrounds */
-  --color-structure: #41423D;      /* Charcoal - text, headers */
+  /* Primary Palette — dark theme (Chris Krough) */
+  --color-foundation: #2F455B;     /* Slate - page background */
+  --color-structure: #F5F0E8;      /* Cream - text, headers */
   --color-accent: #E07A5F;         /* Burnt coral - CTAs, highlights */
 
   /* Supporting */
-  --color-surface: #FAFAF8;        /* Warm white - cards */
-  --color-shadow: #50636F;         /* Blue gray - dark sections */
-  --color-muted: #223342;          /* Muted - secondary text */
-  --color-border: #E5E5E5;         /* Light gray - dividers */
+  --color-surface: #3D5469;        /* Slightly lighter slate - cards */
+  --color-shadow: #50636F;         /* Gray - dark sections */
+  --color-muted: #8FA8B4;          /* Light gray-blue - secondary text */
+  --color-border: #50636F;         /* Gray - dividers */
 
   /* Semantic Aliases */
   --color-background: var(--color-foundation);
@@ -27,7 +27,7 @@
   --color-card: var(--color-surface);
 
   /* Typography */
-  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-heading: 'Inter', system-ui, sans-serif;
   --font-body: 'Inter', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
@@ -66,15 +66,15 @@
   }
 
   h1 {
-    @apply text-h1 font-bold;
+    @apply text-h1 font-semibold;
   }
 
   h2 {
-    @apply text-h2 font-bold;
+    @apply text-h2 font-semibold;
   }
 
   h3 {
-    @apply text-h3 font-semibold;
+    @apply text-h3 font-medium;
   }
 
   h4 {
@@ -131,7 +131,7 @@
   }
 
   .btn-primary {
-    @apply inline-block bg-accent text-surface font-medium px-6 py-3 rounded transition-all duration-200;
+    @apply inline-block bg-accent text-structure font-medium px-6 py-3 rounded transition-all duration-200;
   }
 
   .btn-primary:hover {
