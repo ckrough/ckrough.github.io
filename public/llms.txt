@@ -1,0 +1,36 @@
+# Chris Krough
+
+> Engineering leader and AI transformation consultant with 25+ years of experience. Founder of Backchain, an AI consulting practice. Based in Austin, TX.
+
+## About
+
+Chris Krough is a senior engineering leader with 25 years of experience building and scaling technology organizations. He has guided companies through 3 IPOs and 8 acquisitions, leading platform engineering and technical strategy at Amazon, OJO Labs, Houseful/RBCx, Bazaarvoice, and Rackspace. He founded Backchain to help organizations identify where AI actually works—and build it when it does.
+
+## Services
+
+- [AI Transformation & Implementation](/services): Discovery, prototyping, knowledge systems, LLM evaluation frameworks
+- [Platform Engineering](/services): Architecture design, cloud migration, Kubernetes, platform consolidation
+- [Due Diligence & Acquisition Readiness](/services): Technical due diligence, post-acquisition integration
+- [Engineering Leadership](/services): Fractional/advisory roles, team building, technical strategy
+
+## Projects
+
+- [Retriever](https://github.com/ckrough/retriever): RAG-powered Q&A system with source citations and evaluation framework
+- [Drover](https://github.com/ckrough/drover): AI-powered document classification using LLMs
+- [Agentspaces](https://github.com/ckrough/agentspaces): Agentic development environment for multi-agent AI workflows
+- [Team of Rivals](https://github.com/ckrough/team-of-rivals): Strategic decision-assistance framework as Claude AI Skills
+
+## Pages
+
+- [Home](https://dev.krough.org/): Overview and positioning
+- [Services](https://dev.krough.org/services): Service offerings and engagement models
+- [Experience](https://dev.krough.org/experience): Career timeline (Amazon, OJO Labs, Houseful/RBCx, Bazaarvoice, Rackspace)
+- [Projects](https://dev.krough.org/projects): Featured projects and open source contributions
+- [Contact](https://dev.krough.org/contact): Contact information and engagement inquiry
+
+## Contact
+
+- Email: chris@backchain.ai
+- LinkedIn: linkedin.com/in/ckrough
+- GitHub: github.com/ckrough
+- Business: backchain.ai
