@@ -2,11 +2,12 @@
 interface Props {
   headline: string;
   subheadline?: string;
+  headlineClass?: string;
   ctaText?: string;
   ctaLink?: string;
 }
 
-const { headline, subheadline, ctaText, ctaLink } = Astro.props;
+const { headline, subheadline, headlineClass = 'text-h1', ctaText, ctaLink } = Astro.props;
 
 // Split subheadline by | for smart wrapping (each phrase stays together)
 const subheadlineParts = subheadline?.includes('|')
@@ -19,7 +20,7 @@ const subheadlineParts = subheadline?.includes('|')
 >
   <div class="container-custom">
     <div class="max-w-4xl">
-      <h1 class="text-h1 font-heading font-bold text-structure mb-6 text-balance">
+      <h1 class={`${headlineClass} font-heading font-semibold text-structure mb-6`}>
         {headline}
       </h1>
       {

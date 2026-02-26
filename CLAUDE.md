@@ -22,18 +22,18 @@ npm run preview          # Preview production build locally
 
 ## Design System
 
-Brand colors and typography defined in `tailwind.config.mjs`:
+Dark theme. Brand colors and typography defined in `tailwind.config.mjs`:
 
 | Utility | Color | Usage |
 |---------|-------|-------|
-| `bg-foundation` | #F5F0E8 (warm cream) | Page background |
-| `bg-surface` | #FAFAF8 | Card backgrounds |
-| `text-structure` | #3D3D3D (charcoal) | Primary text |
-| `text-muted` | #6B6B6B | Secondary text |
+| `bg-foundation` | #2F455B (slate) | Page background |
+| `bg-surface` | #3D5469 (lighter slate) | Card backgrounds |
+| `text-structure` | #F5F0E8 (cream) | Primary text |
+| `text-muted` | #8FA8B4 (light gray-blue) | Secondary text |
 | `text-accent` / `bg-accent` | #E07A5F (burnt coral) | **CTAs only** |
-| `border-border` | #E5E5E5 | Borders |
+| `border-border` | #50636F (gray) | Borders |
 
-**Typography:** `font-heading` (Playfair Display), `font-body` (Inter)
+**Typography:** `font-heading` (Inter SemiBold for h1/h2, Medium for h3/h4), `font-body` (Inter)
 
 **Spacing:** Custom scale `xs` through `3xl` (0.5rem to 6rem)
 

@@ -4,17 +4,17 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Brand colors from VISUAL-IDENTITY.md
-        foundation: '#F5F0E8',    // Warm cream - backgrounds
-        surface: '#FAFAF8',        // Warm white - cards
-        shadow: '#50636F',         // Blue gray - dark sections
-        structure: '#41423D',      // Charcoal - text, headers
-        muted: '#223342',          // Muted - secondary text
+        // Brand colors — dark theme (Chris Krough)
+        foundation: '#2F455B',    // Slate - page background
+        surface: '#3D5469',        // Slightly lighter slate - cards
+        shadow: '#50636F',         // Gray - dark sections
+        structure: '#F5F0E8',      // Cream - primary text, headers
+        muted: '#8FA8B4',          // Light gray-blue - secondary text
         accent: '#E07A5F',         // Burnt coral - CTAs, highlights
-        border: '#E5E5E5',         // Light gray - dividers
+        border: '#50636F',         // Gray - dividers
       },
       fontFamily: {
-        heading: ['Playfair Display', 'Georgia', 'serif'],
+        heading: ['Inter', 'system-ui', 'sans-serif'],
         body: ['Inter', 'system-ui', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
       },
@@ -34,8 +34,8 @@ export default {
         'h4': ['1.25rem', { lineHeight: '1.4' }],   // 20px
       },
       boxShadow: {
-        'card': '0 2px 8px rgba(65, 66, 61, 0.08)',
-        'card-hover': '0 4px 16px rgba(65, 66, 61, 0.12)',
+        'card': '0 2px 8px rgba(0, 0, 0, 0.25)',
+        'card-hover': '0 4px 16px rgba(0, 0, 0, 0.35)',
       },
     },
   },
