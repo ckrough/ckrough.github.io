@@ -16,7 +16,7 @@ import ExperienceItem from '../components/ExperienceItem.astro';
 
   <!-- Timeline -->
   <section class="section-spacing">
-    <div class="container-custom">
+    <div class="container-wide">
       <div class="max-w-3xl mx-auto">
         <ExperienceItem
           company="Backchain"
@@ -24,7 +24,7 @@ import ExperienceItem from '../components/ExperienceItem.astro';
           dates="2025 - Present"
           current={true}
           outcomes={[
-            'AI transformation consulting for organizations identifying high-value AI opportunities',
+            'AI transformation consulting — discovery, prototyping, and production implementation',
             'Building AI automation, knowledge systems, document classification, and intelligent tooling',
             'Fractional leadership services for growth-stage startups'
           ]}
@@ -91,27 +91,27 @@ import ExperienceItem from '../components/ExperienceItem.astro';
   </section>
 
   <!-- Additional Info -->
-  <section class="section-spacing bg-surface">
-    <div class="container-custom">
+  <section class="section-spacing bg-foundation-deep">
+    <div class="container-wide">
       <div class="max-w-2xl mx-auto text-center space-y-8">
         <div>
           <h2 class="text-h3 font-heading font-medium text-structure mb-4">
             Career Highlights
           </h2>
           <div class="grid md:grid-cols-2 gap-6">
-            <div>
+            <div class="stat-card bg-surface rounded-lg p-6">
               <p class="text-4xl font-heading font-semibold text-accent mb-2">3</p>
               <p class="text-base text-muted">IPOs Supported</p>
             </div>
-            <div>
+            <div class="stat-card bg-surface rounded-lg p-6">
               <p class="text-4xl font-heading font-semibold text-accent mb-2">8</p>
               <p class="text-base text-muted">Acquisitions Integrated</p>
             </div>
-            <div>
+            <div class="stat-card bg-surface rounded-lg p-6">
               <p class="text-4xl font-heading font-semibold text-accent mb-2">$3B+</p>
               <p class="text-base text-muted">Transaction Volume</p>
             </div>
-            <div>
+            <div class="stat-card bg-surface rounded-lg p-6">
               <p class="text-4xl font-heading font-semibold text-accent mb-2">6,700%</p>
               <p class="text-base text-muted">Revenue Growth</p>
             </div>
@@ -127,7 +127,7 @@ import ExperienceItem from '../components/ExperienceItem.astro';
               href="https://www.linkedin.com/in/ckrough/"
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center justify-center gap-2 text-structure font-medium hover:text-accent transition-colors"
+              class="inline-flex items-center justify-center gap-2 text-structure font-medium hover:text-accent-deep transition-colors"
             >
               <svg
                 class="w-5 h-5"

@@ -8,8 +8,8 @@ const { class: className = '', variant = 'default' } = Astro.props;
 
 const variantClasses = {
   default: 'bg-surface shadow-card',
-  elevated: 'bg-surface shadow-card hover:shadow-card-hover transition-shadow duration-200',
-  bordered: 'bg-surface border border-border',
+  elevated: 'bg-surface shadow-card-elevated hover:shadow-card-hover hover:-translate-y-0.5 transition-all duration-200',
+  bordered: 'bg-surface border border-border shadow-none',
 };
 ---
 

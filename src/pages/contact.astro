@@ -19,7 +19,7 @@ import Card from '../components/Card.astro';
     <div class="container-custom">
       <div class="max-w-2xl mx-auto space-y-8">
         <!-- Primary Contact -->
-        <Card variant="elevated">
+        <Card variant="elevated" class="border-t-2 border-t-accent">
           <div class="space-y-6">
             <div>
               <h3 class="text-h4 font-heading font-medium text-structure mb-4">
@@ -27,7 +27,7 @@ import Card from '../components/Card.astro';
               </h3>
               <a
                 href="mailto:chris@backchain.ai"
-                class="text-xl text-accent underline font-medium"
+                class="text-xl text-structure underline font-medium"
               >
                 chris@backchain.ai
               </a>
@@ -40,7 +40,7 @@ import Card from '../components/Card.astro';
                   href="https://backchain.ai"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="text-accent underline font-medium"
+                  class="text-structure underline font-medium"
                 >
                   Backchain
                 </a>{' '}
@@ -62,7 +62,7 @@ import Card from '../components/Card.astro';
               <div class="flex items-center gap-4">
                 <div class="flex-shrink-0">
                   <svg
-                    class="w-8 h-8 text-muted group-hover:text-accent transition-colors"
+                    class="w-8 h-8 text-muted group-hover:text-accent-deep transition-colors"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                     aria-hidden="true"
@@ -73,7 +73,7 @@ import Card from '../components/Card.astro';
                   </svg>
                 </div>
                 <div>
-                  <h3 class="text-h4 font-heading font-medium text-structure group-hover:text-accent transition-colors">
+                  <h3 class="text-h4 font-heading font-medium text-structure group-hover:text-accent-deep transition-colors">
                     LinkedIn
                   </h3>
                   <p class="text-sm text-muted">Professional profile and network</p>
@@ -92,7 +92,7 @@ import Card from '../components/Card.astro';
               <div class="flex items-center gap-4">
                 <div class="flex-shrink-0">
                   <svg
-                    class="w-8 h-8 text-muted group-hover:text-accent transition-colors"
+                    class="w-8 h-8 text-muted group-hover:text-accent-deep transition-colors"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                     aria-hidden="true"
@@ -104,7 +104,7 @@ import Card from '../components/Card.astro';
                   </svg>
                 </div>
                 <div>
-                  <h3 class="text-h4 font-heading font-medium text-structure group-hover:text-accent transition-colors">
+                  <h3 class="text-h4 font-heading font-medium text-structure group-hover:text-accent-deep transition-colors">
                     GitHub
                   </h3>
                   <p class="text-sm text-muted">Open source and project portfolio</p>
@@ -128,8 +128,8 @@ import Card from '../components/Card.astro';
   </section>
 
   <!-- Services CTA -->
-  <section class="section-spacing bg-surface">
-    <div class="container-custom">
+  <section class="section-spacing bg-foundation-deep">
+    <div class="container-wide">
       <div class="max-w-2xl mx-auto text-center">
         <h2 class="text-h2 font-heading font-semibold text-structure mb-4">
           Ready to Work Together?
@@ -145,7 +145,7 @@ import Card from '../components/Card.astro';
           </a>
           <a
             href="/projects"
-            class="inline-block text-structure font-medium hover:text-accent transition-colors py-3"
+            class="inline-block text-structure font-medium hover:text-accent-deep transition-colors py-3"
           >
             See Projects →
           </a>

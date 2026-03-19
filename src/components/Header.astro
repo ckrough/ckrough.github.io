@@ -10,13 +10,13 @@ const navItems = [
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="sticky top-0 bg-surface shadow-sm z-50">
+<header class="sticky top-0 bg-surface/95 backdrop-blur-sm border-b border-border/30 z-50">
   <nav class="container-custom py-4">
     <div class="flex justify-between items-center">
       <!-- Logo / Name -->
       <a
         href="/"
-        class="text-2xl font-heading font-semibold text-structure hover:text-accent transition-colors"
+        class="text-2xl font-heading font-semibold text-structure hover:text-accent-deep transition-colors"
       >
         Chris Krough
       </a>
@@ -30,8 +30,8 @@ const currentPath = Astro.url.pathname;
                 href={item.href}
                 class={`text-base font-medium transition-colors ${
                   currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href))
-                    ? 'text-accent'
-                    : 'text-structure hover:text-accent'
+                    ? 'text-accent-deep border-b-2 border-accent-deep pb-1'
+                    : 'text-structure hover:text-accent-deep'
                 }`}
               >
                 {item.label}
@@ -44,9 +44,10 @@ const currentPath = Astro.url.pathname;
       <!-- Mobile Menu Button -->
       <button
         id="mobile-menu-button"
-        class="md:hidden text-structure hover:text-accent transition-colors"
+        class="md:hidden text-structure hover:text-accent-deep transition-colors"
         aria-label="Toggle menu"
         aria-expanded="false"
+        aria-controls="mobile-menu"
       >
         <svg
           class="w-6 h-6"
@@ -77,8 +78,8 @@ const currentPath = Astro.url.pathname;
                 href={item.href}
                 class={`text-base font-medium transition-colors block ${
                   currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href))
-                    ? 'text-accent'
-                    : 'text-structure hover:text-accent'
+                    ? 'text-accent-deep'
+                    : 'text-structure hover:text-accent-deep'
                 }`}
               >
                 {item.label}

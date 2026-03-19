@@ -2,13 +2,18 @@
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="bg-surface border-t border-border mt-auto">
-  <div class="container-custom py-8">
-    <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-      <!-- Copyright -->
-      <p class="text-sm text-muted">
-        © {currentYear} Chris Krough. All rights reserved.
-      </p>
+<footer class="bg-foundation-deep mt-auto">
+  <div class="container-wide py-12 md:py-16">
+    <!-- Top row: name + tagline + social -->
+    <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="text-center md:text-left">
+        <p class="text-lg font-heading font-semibold text-structure">
+          Chris Krough
+        </p>
+        <p class="text-sm text-muted mt-1">
+          Engineering Leadership & AI Transformation
+        </p>
+      </div>
 
       <!-- Social Links -->
       <div class="flex items-center gap-6">
@@ -16,11 +21,11 @@ const currentYear = new Date().getFullYear();
           href="https://linkedin.com/in/ckrough"
           target="_blank"
           rel="noopener noreferrer"
-          class="text-muted hover:text-accent transition-colors"
+          class="text-muted hover:text-accent-deep transition-colors"
           aria-label="LinkedIn"
         >
           <svg
-            class="w-5 h-5"
+            class="w-6 h-6"
             fill="currentColor"
             viewBox="0 0 24 24"
             aria-hidden="true"
@@ -35,11 +40,11 @@ const currentYear = new Date().getFullYear();
           href="https://github.com/ckrough"
           target="_blank"
           rel="noopener noreferrer"
-          class="text-muted hover:text-accent transition-colors"
+          class="text-muted hover:text-accent-deep transition-colors"
           aria-label="GitHub"
         >
           <svg
-            class="w-5 h-5"
+            class="w-6 h-6"
             fill="currentColor"
             viewBox="0 0 24 24"
             aria-hidden="true"
@@ -55,11 +60,21 @@ const currentYear = new Date().getFullYear();
           href="https://backchain.ai"
           target="_blank"
           rel="noopener noreferrer"
-          class="text-sm text-muted hover:text-accent transition-colors font-medium"
+          class="text-sm text-muted hover:text-accent-deep transition-colors font-medium"
         >
           Backchain
         </a>
       </div>
     </div>
+
+    <!-- Accent bar divider -->
+    <div class="flex justify-center my-8">
+      <div class="accent-bar-wide"></div>
+    </div>
+
+    <!-- Bottom row: copyright -->
+    <p class="text-sm text-muted text-center">
+      &copy; {currentYear} Chris Krough. All rights reserved.
+    </p>
   </div>
 </footer>
