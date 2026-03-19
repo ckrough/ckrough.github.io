@@ -13,14 +13,14 @@ const { company, role, dates, outcomes, current = false } = Astro.props;
 <div class="relative pl-8 pb-12 last:pb-0">
   <!-- Timeline dot -->
   <div
-    class={`absolute left-0 top-2 w-3 h-3 rounded-full ${
-      current ? 'bg-accent' : 'bg-muted'
+    class={`absolute left-0 top-1.5 w-4 h-4 rounded-full ${
+      current ? 'bg-accent-deep ring-4 ring-accent-deep/20' : 'bg-muted/60 ring-2 ring-muted/20'
     }`}
   >
   </div>
 
   <!-- Timeline line -->
-  <div class="absolute left-[5px] top-5 bottom-0 w-0.5 bg-border last:hidden">
+  <div class="absolute left-[7px] top-6 bottom-0 w-[2px] bg-border/40 last:hidden">
   </div>
 
   <!-- Content -->

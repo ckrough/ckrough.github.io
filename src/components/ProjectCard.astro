@@ -14,11 +14,11 @@ const { name, description, techStack = [], githubUrl, featured = false } = Astro
 
 <Card
   variant="elevated"
-  class={featured ? 'border-2 border-accent' : ''}
+  class={featured ? 'border-t-2 border-t-accent ring-1 ring-border/30' : ''}
 >
   <div class="flex flex-col gap-4">
     {featured && (
-      <span class="inline-block text-xs font-medium text-accent uppercase tracking-wide">
+      <span class="inline-block text-xs font-medium text-muted uppercase tracking-wide">
         Featured Project
       </span>
     )}
@@ -32,7 +32,7 @@ const { name, description, techStack = [], githubUrl, featured = false } = Astro
           href={githubUrl}
           target="_blank"
           rel="noopener noreferrer"
-          class="text-muted hover:text-accent transition-colors flex-shrink-0"
+          class="text-muted hover:text-accent-deep transition-colors flex-shrink-0"
           aria-label={`View ${name} on GitHub`}
         >
           <svg
@@ -58,7 +58,7 @@ const { name, description, techStack = [], githubUrl, featured = false } = Astro
     {techStack.length > 0 && (
       <div class="flex flex-wrap gap-2">
         {techStack.map((tech) => (
-          <span class="text-xs font-medium text-muted bg-foundation px-3 py-1 rounded-full">
+          <span class="text-xs font-medium text-muted bg-foundation px-3 py-1 rounded-full border border-border/40">
             {tech}
           </span>
         ))}

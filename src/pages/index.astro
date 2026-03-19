@@ -17,7 +17,10 @@ import Card from '../components/Card.astro';
 
   <!-- Positioning Statement -->
   <section class="pt-xl pb-md md:pt-2xl md:pb-lg bg-foundation">
-    <div class="container-custom">
+    <div class="container-wide">
+      <div class="flex justify-center mb-6">
+        <div class="accent-bar"></div>
+      </div>
       <p class="text-2xl md:text-3xl font-heading text-structure leading-relaxed max-w-4xl mx-auto text-center">
         25 years leading engineering organizations through IPOs, acquisitions, and platform rebuilds.
       </p>
@@ -25,51 +28,52 @@ import Card from '../components/Card.astro';
   </section>
 
   <!-- Proof Points -->
-  <section class="pt-lg pb-xl md:pt-xl md:pb-2xl"> 
-    <div class="container-custom">
+  <section class="pt-lg pb-xl md:pt-xl md:pb-2xl">
+    <div class="container-wide">
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <Card variant="elevated" class="h-40">
+        <Card variant="elevated" class="h-40 stat-card">
           <div class="flex flex-col h-full text-center">
             <div class="flex-1 flex items-center justify-center">
-              <p class="text-4xl font-heading font-semibold text-accent">25+</p>
+              <p class="text-5xl font-heading font-semibold text-accent">25+</p>
             </div>
-            <p class="text-sm font-medium text-muted uppercase tracking-wide">
+            <p class="text-sm font-medium text-muted uppercase tracking-widest max-w-none">
               Years Experience
             </p>
           </div>
         </Card>
 
-        <Card variant="elevated" class="h-40">
+        <Card variant="elevated" class="h-40 stat-card">
           <div class="flex flex-col h-full text-center">
             <div class="flex-1 flex items-center justify-center">
-              <p class="text-4xl font-heading font-semibold text-accent">3</p>
+              <p class="text-5xl font-heading font-semibold text-accent">3</p>
             </div>
-            <p class="text-sm font-medium text-muted uppercase tracking-wide">
+            <p class="text-sm font-medium text-muted uppercase tracking-widest max-w-none">
               Public Offerings
             </p>
           </div>
         </Card>
 
-        <Card variant="elevated" class="h-40">
+        <Card variant="elevated" class="h-40 stat-card">
           <div class="flex flex-col h-full text-center">
             <div class="flex-1 flex items-center justify-center">
-              <p class="text-4xl font-heading font-semibold text-accent">8</p>
+              <p class="text-5xl font-heading font-semibold text-accent">8</p>
             </div>
-            <p class="text-sm font-medium text-muted uppercase tracking-wide">
+            <p class="text-sm font-medium text-muted uppercase tracking-widest max-w-none">
               Acquisitions
             </p>
           </div>
         </Card>
 
-        <Card variant="elevated" class="h-40">
+        <Card variant="elevated" class="h-40 stat-card">
           <div class="flex flex-col h-full text-center">
             <div class="flex-1 flex items-center justify-center">
-              <div>
-                <p class="text-1xl font-heading font-semibold text-accent">Startup -><br/> Fortune 500</p>
-                
+              <div class="space-y-1">
+                <p class="text-lg font-heading font-semibold text-accent">Startup</p>
+                <p class="text-sm text-muted">to</p>
+                <p class="text-lg font-heading font-semibold text-accent">Fortune 500</p>
               </div>
             </div>
-            <p class="text-sm font-medium text-muted uppercase tracking-wide">
+            <p class="text-sm font-medium text-muted uppercase tracking-widest max-w-none">
               Scale
             </p>
           </div>
@@ -85,14 +89,14 @@ import Card from '../components/Card.astro';
   </section>
 
   <!-- Current Focus -->
-  <section class="section-spacing bg-surface">
+  <section class="section-spacing bg-foundation-deep">
     <div class="container-custom">
       <div class="max-w-3xl mx-auto">
         <h2 class="text-h2 font-heading font-semibold text-structure mb-8 text-center">
           Current Focus
         </h2>
 
-        <Card variant="bordered">
+        <Card variant="bordered" class="border-l-2 border-l-accent">
           <div class="space-y-4">
             <h3 class="text-h3 font-heading font-medium text-structure">
               AI Transformation Consulting
@@ -102,18 +106,18 @@ import Card from '../components/Card.astro';
                 href="https://backchain.ai"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="text-accent underline font-medium">Backchain</a
+                class="text-structure underline font-medium">Backchain</a
               >, I help organizations identify high-value AI opportunities and build
               production systems that work.
             </p>
 
             <div class="space-y-2">
               <p class="text-base text-muted">
-                <span class="text-accent font-medium">Building:</span> Knowledge systems,
+                <span class="text-structure font-medium">Building:</span> Knowledge systems,
                 LLM evaluation frameworks, intelligent automation
               </p>
               <p class="text-base text-muted">
-                <span class="text-accent font-medium">Focus:</span> Finding where AI
+                <span class="text-structure font-medium">Focus:</span> Finding where AI
                 actually works, not just where it's trendy
               </p>
             </div>
@@ -124,7 +128,7 @@ import Card from '../components/Card.astro';
               </a>
               <a
                 href="/projects"
-                class="inline-block ml-4 text-structure font-medium hover:text-accent transition-colors"
+                class="inline-block ml-4 text-structure font-medium hover:text-accent-deep transition-colors"
               >
                 See Projects →
               </a>
@@ -137,12 +141,12 @@ import Card from '../components/Card.astro';
 
   <!-- Quick Navigation -->
   <section class="section-spacing">
-    <div class="container-custom">
+    <div class="container-wide">
       <div class="grid md:grid-cols-3 gap-6">
         <a href="/services" class="group">
           <Card variant="elevated">
-            <h3 class="text-h4 font-heading font-medium text-structure group-hover:text-accent transition-colors mb-2">
-              Services
+            <h3 class="text-h4 font-heading font-medium text-structure group-hover:text-accent-deep transition-colors mb-2">
+              Services <span class="inline-block transition-transform duration-200 group-hover:translate-x-1">&rarr;</span>
             </h3>
             <p class="text-base text-muted">
               AI transformation, platform engineering, M&A due diligence, and engineering
@@ -153,8 +157,8 @@ import Card from '../components/Card.astro';
 
         <a href="/projects" class="group">
           <Card variant="elevated">
-            <h3 class="text-h4 font-heading font-medium text-structure group-hover:text-accent transition-colors mb-2">
-              Projects
+            <h3 class="text-h4 font-heading font-medium text-structure group-hover:text-accent-deep transition-colors mb-2">
+              Projects <span class="inline-block transition-transform duration-200 group-hover:translate-x-1">&rarr;</span>
             </h3>
             <p class="text-base text-muted">
               Knowledge systems, document classification, development tools, and open source
@@ -165,8 +169,8 @@ import Card from '../components/Card.astro';
 
         <a href="/experience" class="group">
           <Card variant="elevated">
-            <h3 class="text-h4 font-heading font-medium text-structure group-hover:text-accent transition-colors mb-2">
-              Experience
+            <h3 class="text-h4 font-heading font-medium text-structure group-hover:text-accent-deep transition-colors mb-2">
+              Experience <span class="inline-block transition-transform duration-200 group-hover:translate-x-1">&rarr;</span>
             </h3>
             <p class="text-base text-muted">
               Backchain, Houseful/RBCx, OJO Labs, Amazon, University of Pennsylvania, and more.

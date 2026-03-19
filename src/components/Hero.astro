@@ -16,13 +16,14 @@ const subheadlineParts = subheadline?.includes('|')
 ---
 
 <section
-  class="relative py-2xl md:py-3xl bg-gradient-to-br from-foundation via-surface to-foundation"
+  class="relative py-2xl md:py-3xl bg-gradient-to-br from-foundation-deep via-foundation to-surface/30"
 >
-  <div class="container-custom">
+  <div class="container-wide">
     <div class="max-w-4xl">
-      <h1 class={`${headlineClass} font-heading font-semibold text-structure mb-6`}>
+      <h1 class={`${headlineClass} font-heading font-semibold text-structure mb-4`}>
         {headline}
       </h1>
+      <div class="accent-bar mt-4 mb-6"></div>
       {
         subheadlineParts ? (
           <p class="text-xl md:text-2xl text-muted mb-8">
@@ -48,4 +49,6 @@ const subheadlineParts = subheadline?.includes('|')
       }
     </div>
   </div>
+  <!-- Bottom separator -->
+  <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border/40 to-transparent"></div>
 </section>
