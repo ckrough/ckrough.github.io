@@ -65,14 +65,10 @@ import Card from '../components/Card.astro';
         </Card>
 
         <Card variant="elevated" class="h-40 stat-card">
-          <div class="flex flex-col h-full text-center">
-            <div class="flex-1 flex items-center justify-center">
-              <div class="space-y-1">
-                <p class="text-lg font-heading font-semibold text-accent">Startup</p>
-                <p class="text-sm text-muted">to</p>
-                <p class="text-lg font-heading font-semibold text-accent">Fortune 500</p>
-              </div>
-            </div>
+          <div class="flex flex-col h-full text-center justify-between [&>p]:mb-0">
+            <p class="text-lg font-heading font-semibold text-accent">Startup</p>
+            <p class="text-sm text-muted">to</p>
+            <p class="text-lg font-heading font-semibold text-accent">Fortune 500</p>
             <p class="text-sm font-medium text-muted uppercase tracking-widest max-w-none">
               Scale
             </p>
