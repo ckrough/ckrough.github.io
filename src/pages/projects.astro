@@ -35,20 +35,12 @@ import ProjectCard from '../components/ProjectCard.astro';
           githubUrl="https://github.com/ckrough/drover"
         />
 
-        <!-- Agentspaces -->
+        <!-- Advisors -->
         <ProjectCard
-          name="Agentspaces"
-          description="Agentic development environment for managing multi-agent AI workflows. Isolated worktrees, dependency management, and CI integration. Production tooling for complex AI-assisted development projects requiring context persistence across sessions."
-          techStack={['Python', 'Git Worktrees', 'Claude AI', 'CLI Tools']}
-          githubUrl="https://github.com/ckrough/agentspaces"
-        />
-
-        <!-- Team of Rivals -->
-        <ProjectCard
-          name="Team of Rivals"
-          description="Claude AI Skill Showcase: Strategic decision-assistance framework inspired by Abraham Lincoln's 'Team of Rivals' approach, implemented as Claude AI Skills. Get diverse, adversarial perspectives on your decisions instead of a single AI viewpoint."
-          techStack={['Multi-Agent Orchestration', 'Claude Skills', 'AI Agents']}
-          githubUrl="https://github.com/ckrough/team-of-rivals"
+          name="Advisors"
+          description="Strategic decision-assistance skill that provides adversarial, multi-perspective analysis to balance the LLM's typically single viewpoint. Conforms to the [agentskills.io](https://agentskills.io/) specification for portable, harness-independent skills. Includes an executable evaluation framework that scores skill outputs against assertions using LLM-as-judge, with each run executed in clean-room isolation to prevent leakage from local context and configuration."
+          techStack={['Multi-Agent Orchestration', 'Claude Skills', 'agentskills.io', 'LLM Evaluation']}
+          githubUrl="https://github.com/backchainai/backchain-plugins/tree/main/advisors"
         />
       </div>
     </div>
