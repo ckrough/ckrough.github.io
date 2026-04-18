@@ -1,0 +1,275 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Card from '../components/Card.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+---
+
+<BaseLayout
+  title="Methods - Chris Krough"
+  description="Methods for building with agents: harness engineering, evaluation, multi-instance coordination, MCP fluency. Public artifacts included."
+>
+  <Hero
+    headline="Methods"
+    subheadline="How I build with agents in production. Harness engineering, evaluation, multi-instance coordination. Each section links to a public artifact."
+  />
+
+  <!-- §2 Harness engineering -->
+  <section class="section-spacing bg-foundation-deep">
+    <div class="container-wide">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-h2 font-heading font-semibold text-structure mb-4">Harness engineering</h2>
+        <p class="text-base text-muted mb-8 max-w-3xl">
+          Patterns for steering the agentic harness for consistent reliable results: lifecycle hooks, scoped subagents, and portable skills.
+        </p>
+
+        <div class="space-y-6">
+          <ServiceCard
+            title="Hooks"
+            description="Lifecycle hooks (PreToolUse, PostToolUse, PostCompact) run in production to enforce guardrails, route follow-up work, and preserve context across long sessions."
+            items={[
+              'PreToolUse guards reject unsafe edits before they reach the filesystem.',
+              'PostToolUse reminders route follow-up work to the right skill.',
+              'PostCompact restores context so long-running sessions stay coherent.',
+            ]}
+          />
+
+          <ServiceCard
+            title="Named subagents with tool-scope constraints"
+            description="Subagents specialize by responsibility, each with a tool allowlist scoped to the role."
+            items={[
+              'Correctness: a role cannot reach for a tool outside its mandate.',
+              'Speed: narrower tool surfaces produce faster, more focused decisions.',
+              'Auditability: role boundaries are explicit in configuration.',
+            ]}
+          />
+
+          <ServiceCard
+            title="Plugins conforming to the agentskills.io specification"
+            description="Skills are authored to the agentskills.io specification. They remain portable and harness-independent. Published through Backchain."
+          >
+            <ul class="space-y-2 mt-2">
+              <li class="text-base text-muted flex items-start">
+                <span class="text-accent mr-2 flex-shrink-0">•</span>
+                <span>
+                  <a href="https://github.com/backchainai/backchain-plugins" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-structure underline">github.com/backchainai/backchain-plugins</a>
+                </span>
+              </li>
+              <li class="text-base text-muted flex items-start">
+                <span class="text-accent mr-2 flex-shrink-0">•</span>
+                <span>
+                  <a href="https://agentskills.io/specification" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-structure underline">agentskills.io specification</a>
+                </span>
+              </li>
+            </ul>
+          </ServiceCard>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §3 Context and model budgeting -->
+  <section class="section-spacing">
+    <div class="container-wide">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-h2 font-heading font-semibold text-structure mb-4">Context and model budgeting</h2>
+        <p class="text-base text-muted mb-8 max-w-3xl">
+          Two knobs control efficiency: which model runs the work, and what context loads before it starts.
+        </p>
+
+        <div class="space-y-6">
+          <ServiceCard
+            title="Context stacking across configuration roots"
+            description="Three configuration layers compose at runtime. User root (~/.claude) holds broadly useful skills and plugins, kept lean by disabling most by default. A professional-domain root holds work references, standards, and voice guides. Project roots (.claude, CLAUDE.md) hold repo-specific rules. claude --add-dir stacks the domain onto a project without polluting either context. --plugin-dir extends the pattern to plugins."
+            items={[
+              'Scoped installs: skills enabled per project rather than globally.',
+              'Selective enable-by-default: expensive context loads only when needed.',
+              'Shared references: professional standards reused across projects without duplication.',
+            ]}
+          />
+
+          <ServiceCard
+            title="Rules, standards, references"
+            description="Rules in .claude/rules/ auto-load on session start. They stay thin and encode project conventions: file naming, git protocol, issue tracking, voice. Companion material in .claude/standards/ and reference/ loads only when a skill calls for it. Context stays compact until depth matters."
+            items={[
+              'Rules: auto-loaded conventions, one topic per file.',
+              'Standards: full registries, specs, and tables loaded on demand.',
+              'References: external URL lists and vocabulary pulled by skills when relevant.',
+            ]}
+          />
+
+          <ServiceCard
+            title="Model-tier routing"
+            description="Skills and subagents specify the model appropriate to the role. Fast cheap models run triage, summarization, and shallow lookups. Advanced models run architecture, review, and planning. Cost tracks complexity."
+            items={[
+              'Triage and routing: fast tier.',
+              'Implementation and editing: mid tier.',
+              'Architecture and review: advanced tier.',
+            ]}
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §4 Evaluation practice -->
+  <section class="section-spacing bg-foundation-deep">
+    <div class="container-wide">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-h2 font-heading font-semibold text-structure mb-4">Evaluation practice</h2>
+        <p class="text-base text-muted mb-8 max-w-3xl">
+          Prompt-defined skills have no ground truth. Reproducible evaluation distinguishes real quality changes from run-to-run variance.
+        </p>
+
+        <div class="space-y-6">
+          <ServiceCard
+            title="Methods"
+            description="Every skill change is graded against a fixed rubric in a reproducible harness."
+            items={[
+              'Assertion-based LLM-as-judge grading against per-criterion rubrics.',
+              'Clean-room isolation via claude --bare prevents state leakage between trials.',
+              'promptfoo in CI for regression across releases.',
+            ]}
+          />
+
+          <Card variant="default">
+            <h3 class="text-h3 font-heading font-medium text-structure mb-3">Worked example: Advisors plugin</h3>
+            <p class="text-base text-structure leading-relaxed mb-3">
+              Advisors scored 96%. Baseline scored 45%. 60 grading runs, zero parse failures.
+            </p>
+            <p class="text-base text-muted">
+              <a href="https://github.com/backchainai/backchain-plugins/blob/main/advisors/evals/README.md" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-structure underline">Evaluation framework and method (README)</a>
+            </p>
+          </Card>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §5 Multi-instance ownership -->
+  <section class="section-spacing">
+    <div class="container-wide">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-h2 font-heading font-semibold text-structure mb-4">Multi-instance ownership for parallel agents</h2>
+
+        <Card variant="bordered" class="border-l-4 border-l-accent mb-6">
+          <p class="text-base text-structure">
+            Built on Steve Yegge's <a href="https://github.com/steveyegge/beads" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-structure underline">Beads</a> and <a href="https://www.dolthub.com/" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-structure underline">Dolt</a>.
+          </p>
+        </Card>
+
+        <div class="space-y-4 text-base text-structure leading-relaxed max-w-3xl">
+          <p>
+            Each Claude instance takes a branch-scoped identity and claims work atomically against a shared issue tracker. Claims fail fast when another instance already owns the work. Ownership persists through context compaction and survives session restarts. An issue stays claimed until the branch merges.
+          </p>
+          <p>
+            The pattern generalizes. Any agent harness coordinating multiple workers on parallel, durable work against a shared state store can adopt the same claim and release lifecycle.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §6 MCP server fluency -->
+  <section class="section-spacing bg-foundation-deep">
+    <div class="container-wide">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-h2 font-heading font-semibold text-structure mb-4">MCP server fluency</h2>
+        <p class="text-base text-muted mb-8 max-w-3xl">
+          MCP servers running in production.
+        </p>
+
+        <ul class="space-y-3">
+          <li class="text-base text-structure flex items-start">
+            <span class="text-accent mr-3 flex-shrink-0">•</span>
+            <span><strong class="font-medium">Docling:</strong> DOCX fidelity for document-heavy workflows.</span>
+          </li>
+          <li class="text-base text-structure flex items-start">
+            <span class="text-accent mr-3 flex-shrink-0">•</span>
+            <span><strong class="font-medium">Playwright:</strong> validates generated UIs before commit.</span>
+          </li>
+          <li class="text-base text-structure flex items-start">
+            <span class="text-accent mr-3 flex-shrink-0">•</span>
+            <span><strong class="font-medium">Gmail and GitHub:</strong> operational loops against real work queues.</span>
+          </li>
+          <li class="text-base text-structure flex items-start">
+            <span class="text-accent mr-3 flex-shrink-0">•</span>
+            <span><strong class="font-medium">Anthropic plugins:</strong> first-party integrations for Claude Code skills.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- §7 Foundations -->
+  <section class="section-spacing">
+    <div class="container-wide">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-h2 font-heading font-semibold text-structure mb-4">Foundations</h2>
+        <p class="text-base text-muted mb-8 max-w-3xl">
+          Ongoing reading and study.
+        </p>
+
+        <ul class="space-y-3 mb-8">
+          <li class="text-base text-structure flex items-start">
+            <span class="text-accent mr-3 flex-shrink-0">•</span>
+            <span><strong class="font-medium">DeepLearning.AI Deep Learning Specialization.</strong> Studying.</span>
+          </li>
+          <li class="text-base text-structure flex items-start">
+            <span class="text-accent mr-3 flex-shrink-0">•</span>
+            <span><strong class="font-medium">3Blue1Brown.</strong> Linear algebra and calculus underpinning LLMs.</span>
+          </li>
+          <li class="text-base text-structure flex items-start">
+            <span class="text-accent mr-3 flex-shrink-0">•</span>
+            <span><strong class="font-medium">Andrej Karpathy, "Neural Networks: Zero to Hero."</strong> makemore, micrograd, nanoGPT.</span>
+          </li>
+          <li class="text-base text-structure flex items-start">
+            <span class="text-accent mr-3 flex-shrink-0">•</span>
+            <span><strong class="font-medium">MIT OpenCourseWare.</strong></span>
+          </li>
+          <li class="text-base text-structure flex items-start">
+            <span class="text-accent mr-3 flex-shrink-0">•</span>
+            <span><strong class="font-medium">Anthropic Discord; invite-only agentskills.io Discord.</strong> Invited by Anthropic team members. Community focused on portable open-source agent skills compatible across agentic harnesses.</span>
+          </li>
+        </ul>
+
+        <p class="text-base text-structure leading-relaxed max-w-3xl">
+          <strong class="font-medium">Changelog-driven adoption.</strong> Features from the Claude changelog (hooks, subagents, plugins, Docling MCP) enter production within weeks of release.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- §8 Published work -->
+  <section class="section-spacing bg-foundation-deep">
+    <div class="container-wide">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-h2 font-heading font-semibold text-structure mb-8">Published work</h2>
+
+        <ul class="space-y-3">
+          <li class="text-base text-structure flex items-start">
+            <span class="text-accent mr-3 flex-shrink-0">•</span>
+            <span>
+              <a href="https://github.com/backchainai/backchain-plugins" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-structure underline">github.com/backchainai/backchain-plugins</a>.
+              Portable skills conforming to the agentskills.io specification.
+            </span>
+          </li>
+          <li class="text-base text-structure flex items-start">
+            <span class="text-accent mr-3 flex-shrink-0">•</span>
+            <span>
+              <a href="https://github.com/backchainai/backchain-plugins/tree/main/advisors" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-structure underline">backchain-plugins/advisors</a>.
+              Multi-perspective evaluation plugin.
+            </span>
+          </li>
+          <li class="text-base text-structure flex items-start">
+            <span class="text-accent mr-3 flex-shrink-0">•</span>
+            <span>
+              <a href="https://github.com/backchainai/backchain-plugins/blob/main/advisors/evals/README.md" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-structure underline">advisors/evals/README.md</a>.
+              Open-source evaluation framework.
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
