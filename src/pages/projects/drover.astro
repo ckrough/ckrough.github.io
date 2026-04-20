@@ -1,0 +1,139 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import Card from '../../components/Card.astro';
+---
+
+<BaseLayout
+  title="Drover - Projects - Chris Krough"
+  description="Drover: AI-powered document classification. 7-step chain-of-thought prompting, NARA-compliant naming, local-first by default."
+>
+  <Hero
+    headline="Drover"
+    subheadline="AI-powered document classification that herds files into organized folders."
+  />
+
+  <!-- Problem -->
+  <section class="section-spacing">
+    <div class="container-wide">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-h2 font-heading font-semibold text-structure mb-4">Problem</h2>
+        <div class="space-y-4 text-base text-structure leading-relaxed">
+          <p>
+            Scanned PDFs, downloaded invoices, medical records, and email attachments accumulate in Downloads. Filing them by hand is tedious; filing them inconsistently is worse, because the next-time search relies on the naming convention holding up.
+          </p>
+          <p>
+            Drover classifies each document by domain, category, and type, extracts the vendor and relevant date, and suggests a standardized filename and destination path against a controlled taxonomy. Named after herding dogs that drive livestock, because that is the job: take scattered documents and move them into a consistent structure.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Architecture -->
+  <section class="section-spacing bg-foundation-deep">
+    <div class="container-wide">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-h2 font-heading font-semibold text-structure mb-4">Architecture</h2>
+        <div class="space-y-6 text-base text-structure leading-relaxed">
+          <p>
+            A linear pipeline with extensible plugin points at every stage.
+          </p>
+          <pre class="bg-foundation-deep border border-border/40 rounded-lg p-6 text-sm text-structure overflow-x-auto leading-relaxed"><code>[document] → [loader] → [sampler] → [classifier] → [pathbuilder] → [output]
+                 │          │              │               │
+                 ▼          ▼              ▼               ▼
+              [format]  [strategy]     [taxonomy]     [naming policy]
+</code></pre>
+          <p>
+            The <strong class="font-medium">loader</strong> handles PDFs, Office formats, images, email, and plain text. The <strong class="font-medium">sampler</strong> picks pages by strategy: full, first-n, bookends, or adaptive for long documents, so the classifier is not handed a 200-page PDF verbatim. The <strong class="font-medium">classifier</strong> runs a 7-step chain-of-thought prompt: extract key information, evaluate dates by priority, determine doctype, analyze candidate categories, determine domain, extract vendor, synthesize subject.
+          </p>
+          <p>
+            The <strong class="font-medium">pathbuilder</strong> applies a naming policy (NARA-compliant by default: <code class="text-sm bg-foundation px-1.5 py-0.5 rounded" set:html="&#123;doctype&#125;-&#123;vendor&#125;-&#123;subject&#125;-&#123;date&#125;.pdf"></code>) to the classifier's structured output and produces a suggested path. Output is either JSON per document or a JSONL batch for pipelines. On macOS, a separate <code class="text-sm bg-foundation px-1.5 py-0.5 rounded">tag</code> command writes the classification as native filesystem tags.
+          </p>
+          <p>
+            LLM providers are swappable: Ollama (local, the default), OpenAI, Anthropic, OpenRouter. Structured output comes from LangChain's <code class="text-sm bg-foundation px-1.5 py-0.5 rounded">with_structured_output</code> over a Pydantic schema, so parsing is never a regex against model prose.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Evaluation -->
+  <section class="section-spacing">
+    <div class="container-wide">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-h2 font-heading font-semibold text-structure mb-4">Evaluation</h2>
+        <div class="space-y-4 text-base text-structure leading-relaxed">
+          <p>
+            Drover ships an evaluation harness (<code class="text-sm bg-foundation px-1.5 py-0.5 rounded">eval/ground_truth.jsonl</code>) and an <code class="text-sm bg-foundation px-1.5 py-0.5 rounded">evaluate</code> command that scores classifier output against labeled samples.
+          </p>
+        </div>
+
+        <Card variant="default" class="mt-8">
+          <h3 class="text-h3 font-heading font-medium text-structure mb-3">Recorded result</h3>
+          <p class="text-base text-structure leading-relaxed mb-3">
+            On household documents, domain accuracy moved from ~75% with a naive single-shot prompt to ~92% after introducing the 7-step chain-of-thought template. Remaining misclassifications shifted from "wrong domain" to edge cases, which I treat as the acceptable failure mode.
+          </p>
+          <p class="text-base text-muted">
+            Full rationale and evidence in <a href="https://github.com/ckrough/drover/blob/main/docs/adr/001-chain-of-thought-prompting.md" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-structure underline">ADR-001: Chain-of-Thought Prompting</a>.
+          </p>
+        </Card>
+      </div>
+    </div>
+  </section>
+
+  <!-- Learnings -->
+  <section class="section-spacing bg-foundation-deep">
+    <div class="container-wide">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-h2 font-heading font-semibold text-structure mb-4">Three learnings</h2>
+
+        <ol class="space-y-6">
+          <li class="text-base text-structure leading-relaxed">
+            <span class="text-accent font-medium">1.</span> Naive "classify this document" prompts hit a ceiling. Explicit numbered reasoning (extract, date priority, doctype, domain, vendor, subject) inside <code class="text-sm bg-foundation px-1.5 py-0.5 rounded">&lt;classification_analysis&gt;</code> tags pushed accuracy roughly seventeen points and, more importantly, made failures debuggable. The reasoning output is the debug log.
+          </li>
+          <li class="text-base text-structure leading-relaxed">
+            <span class="text-accent font-medium">2.</span> The hardest classification call is distinguishing fundamental purpose from transactional use. A bank statement used for taxes is still a bank statement. The taxonomy rules had to spell that out explicitly ("classify by fundamental purpose, not how the document is used"). Without the rule, the classifier drifts toward whatever labels the user's recent folders suggest.
+          </li>
+          <li class="text-base text-structure leading-relaxed">
+            <span class="text-accent font-medium">3.</span> Privacy-first was non-negotiable for the use case. Financial and medical documents should not need to leave the device to get a filing suggestion. Multi-provider support exists so users can trade off accuracy against privacy on purpose. The default keeps data on the device.
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- Links -->
+  <section class="section-spacing">
+    <div class="container-wide">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-h2 font-heading font-semibold text-structure mb-8">Links</h2>
+
+        <ul class="space-y-3">
+          <li class="text-base text-structure flex items-start">
+            <span class="text-accent mr-3 flex-shrink-0">•</span>
+            <span>
+              <a href="https://github.com/ckrough/drover" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-structure underline">github.com/ckrough/drover</a>. Source, CLI, and configuration reference.
+            </span>
+          </li>
+          <li class="text-base text-structure flex items-start">
+            <span class="text-accent mr-3 flex-shrink-0">•</span>
+            <span>
+              <a href="https://github.com/ckrough/drover/blob/main/docs/adr/001-chain-of-thought-prompting.md" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-structure underline">ADR-001: Chain-of-Thought Prompting</a>. The reasoning template and its evidence.
+            </span>
+          </li>
+          <li class="text-base text-structure flex items-start">
+            <span class="text-accent mr-3 flex-shrink-0">•</span>
+            <span>
+              <a href="https://github.com/ckrough/drover/blob/main/docs/adr/002-privacy-first-design.md" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-structure underline">ADR-002: Privacy-First Design</a>. The local-first rationale.
+            </span>
+          </li>
+          <li class="text-base text-structure flex items-start">
+            <span class="text-accent mr-3 flex-shrink-0">•</span>
+            <a href="/projects" class="text-accent hover:text-structure underline">Back to projects</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

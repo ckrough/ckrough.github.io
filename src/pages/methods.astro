@@ -1,0 +1,240 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Card from '../components/Card.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+---
+
+<BaseLayout
+  title="Methods - Chris Krough"
+  description="How I build with agentic workflows in production: harness engineering, evaluation, multi-instance coordination, MCP fluency. Public artifacts included."
+>
+  <Hero
+    headline="Methods"
+    subheadline="How I build with agentic workflows in production: harness engineering, evaluation, and multi-instance coordination."
+  />
+
+  <!-- §2 Harness engineering -->
+  <section class="section-spacing bg-foundation-deep">
+    <div class="container-wide">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-h2 font-heading font-semibold text-structure mb-4">Harness engineering</h2>
+        <p class="text-base text-muted mb-8 max-w-3xl">
+          I treat the agentic harness as configurable infrastructure I can tune at every layer. Three patterns do most of the work.
+        </p>
+
+        <div class="space-y-6">
+          <ServiceCard
+            title="Lifecycle hooks"
+            description="I use hooks to catch unsafe tool calls before they run, hand off follow-up work to the right subagent, and reload project conventions after the runtime compacts a long session. The policy lives in config where I can audit and version it."
+            items={[
+              'Pre-action hooks reject unsafe edits before they hit the filesystem or network.',
+              'Post-action hooks route the next step to the appropriate skill or subagent.',
+              'Post-compaction hooks reload the rules the agent needs after the runtime summarizes a session.',
+            ]}
+          />
+
+          <ServiceCard
+            title="Scoped subagents"
+            description="I split work across subagents scoped by role (reviewer, planner, implementer, auditor) and give each one only the tools its role needs. If the reviewer does not have write access, it cannot write. The boundary is declared in config and enforced by the harness."
+            items={[
+              'Correctness: a subagent cannot invoke tools outside its mandate.',
+              'Speed: smaller tool surfaces produce faster, more focused outputs.',
+              'Auditability: role boundaries are explicit in configuration.',
+            ]}
+          />
+
+          <ServiceCard
+            title="Portable skills"
+            description="I write skills against the agentskills.io specification so they are not locked to one vendor's harness. I publish them through Backchain."
+          >
+            <ul class="space-y-2 mt-2">
+              <li class="text-base text-muted flex items-start">
+                <span class="text-accent mr-2 flex-shrink-0">•</span>
+                <span>
+                  <a href="https://github.com/backchainai/backchain-plugins" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-structure underline">github.com/backchainai/backchain-plugins</a>
+                </span>
+              </li>
+              <li class="text-base text-muted flex items-start">
+                <span class="text-accent mr-2 flex-shrink-0">•</span>
+                <span>
+                  <a href="https://agentskills.io/specification" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-structure underline">agentskills.io specification</a>
+                </span>
+              </li>
+            </ul>
+          </ServiceCard>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §3 Context and model budgeting -->
+  <section class="section-spacing">
+    <div class="container-wide">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-h2 font-heading font-semibold text-structure mb-4">Context and model budgeting</h2>
+        <p class="text-base text-muted mb-8 max-w-3xl">
+          Two things drive my cost and latency: which model does the work, and how much context loads before it starts. I tune both.
+        </p>
+
+        <div class="space-y-6">
+          <ServiceCard
+            title="Layered configuration"
+            description="My setup pulls from three layers at runtime: a user-level set of broadly useful skills (most disabled by default), a domain layer for shared standards and voice across a body of related work, and project-specific rules auto-loaded per repo. Loading all of it everywhere wastes tokens. Loading none of it means the agent forgets its conventions every session."
+            items={[
+              'User layer: widely reusable skills, opt-in per project.',
+              'Domain layer: standards and voice guides shared across related work.',
+              'Project layer: repository-specific rules, auto-loaded.',
+            ]}
+          />
+
+          <ServiceCard
+            title="Rules, standards, references"
+            description="My rules are thin and always loaded: naming, git workflow, issue tracking, voice. Standards and references hold the depth (registries, specs, tables) and only load when a skill asks for them."
+            items={[
+              'Rules: always loaded, one topic per file.',
+              'Standards: full registries and specifications, loaded on demand.',
+              'References: external URL lists, vocabulary, and reading material pulled when relevant.',
+            ]}
+          />
+
+          <ServiceCard
+            title="Model-tier routing"
+            description="Each skill and subagent declares the model appropriate to the role. Triage, summarization, and shallow lookups go to the fast tier. Implementation and editing go to the mid tier. Architecture, review, and planning go to the capable tier."
+            items={[
+              'Fast tier: triage, summarization, and shallow lookups.',
+              'Mid tier: implementation and editing.',
+              'Capable tier: architecture, review, and planning.',
+            ]}
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §4 Evaluation practice -->
+  <section class="section-spacing bg-foundation-deep">
+    <div class="container-wide">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-h2 font-heading font-semibold text-structure mb-4">Evaluation practice</h2>
+        <p class="text-base text-muted mb-8 max-w-3xl">
+          Prompts have no ground truth, so "this feels better" is not evidence. I grade every skill change against a fixed rubric in a reproducible harness and compare runs.
+        </p>
+
+        <div class="space-y-6">
+          <ServiceCard
+            title="Methods"
+            description="I use LLM-as-judge grading against per-criterion rubrics, and I run trials in clean-room sessions (claude --bare) so my plugins and CLAUDE.md files do not leak into the evaluation. The full harness runs on every release."
+            items={[
+              'Assertion-based LLM-as-judge grading against per-criterion rubrics.',
+              'Clean-room isolation (claude --bare) prevents state leakage between trials.',
+              'Python runner in advisors/evals/, reproducible and open source.',
+            ]}
+          />
+
+          <Card variant="default">
+            <h3 class="text-h3 font-heading font-medium text-structure mb-3">Worked example: Advisors plugin</h3>
+            <p class="text-base text-structure leading-relaxed mb-3">
+              Advisors hit 96% on the rubric. The bare-prompt baseline hit 45%. Sixty graded trials per release, zero parse failures. The runner and rubric are in <a href="https://github.com/backchainai/backchain-plugins/tree/main/advisors/evals" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-structure underline">advisors/evals/</a> if you want to reproduce them.
+            </p>
+            <p class="text-base text-muted">
+              <a href="https://github.com/backchainai/backchain-plugins/blob/main/advisors/evals/README.md" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-structure underline">Evaluation framework and method (README)</a>
+            </p>
+          </Card>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §5 Multi-instance ownership -->
+  <section class="section-spacing">
+    <div class="container-wide">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-h2 font-heading font-semibold text-structure mb-4">Multi-instance ownership for parallel agents</h2>
+
+        <div class="space-y-4 text-base text-structure leading-relaxed max-w-3xl">
+          <p>
+            I run multiple agent instances in parallel on the same project. Without coordination they overwrite each other's work. This pattern is how I keep them out of each other's way.
+          </p>
+          <p>
+            Each instance takes a branch-scoped identity and claims tasks atomically from a shared state store. A claim fails immediately when another instance already owns the task. One instance refactors a module, another fixes a bug, a third writes tests. The coordination layer is git worktrees plus a shared tracker. No central scheduler.
+          </p>
+          <p>
+            The approach builds on Steve Yegge's <a href="https://github.com/steveyegge/beads" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-structure underline">Beads</a> and <a href="https://www.dolthub.com/" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-structure underline">Dolt</a>. Claims persist through context compaction and survive session restarts. An issue stays claimed until the branch is merged.
+          </p>
+          <p>
+            The pattern extends beyond any single harness. Any orchestrator running multiple workers against a shared state store can use the same claim-and-release lifecycle.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §6 MCP server fluency -->
+  <section class="section-spacing bg-foundation-deep">
+    <div class="container-wide">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-h2 font-heading font-semibold text-structure mb-4">MCP server fluency</h2>
+        <p class="text-base text-muted mb-8 max-w-3xl">
+          MCP is where most of my leverage comes from. The servers I rely on in production:
+        </p>
+
+        <ul class="space-y-3 mb-6">
+          <li class="text-base text-structure flex items-start">
+            <span class="text-accent mr-3 flex-shrink-0">•</span>
+            <span><strong class="font-medium">Docling:</strong> DOCX fidelity for document-heavy workflows (python-docx mangles tracked changes).</span>
+          </li>
+          <li class="text-base text-structure flex items-start">
+            <span class="text-accent mr-3 flex-shrink-0">•</span>
+            <span><strong class="font-medium">Playwright:</strong> validates generated UIs before I let the agent commit.</span>
+          </li>
+          <li class="text-base text-structure flex items-start">
+            <span class="text-accent mr-3 flex-shrink-0">•</span>
+            <span><strong class="font-medium">Gmail and GitHub:</strong> the loop runs against the work queues I use day-to-day.</span>
+          </li>
+          <li class="text-base text-structure flex items-start">
+            <span class="text-accent mr-3 flex-shrink-0">•</span>
+            <span><strong class="font-medium">First-party vendor plugins:</strong> integrations for the harness's native skills and workflows.</span>
+          </li>
+        </ul>
+
+        <p class="text-base text-structure leading-relaxed max-w-3xl">
+          I adopt upstream harness features (lifecycle hooks, subagents, plugins, new MCP servers) within weeks of release.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- §7 Published work -->
+  <section class="section-spacing">
+    <div class="container-wide">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-h2 font-heading font-semibold text-structure mb-8">Published work</h2>
+
+        <ul class="space-y-3">
+          <li class="text-base text-structure flex items-start">
+            <span class="text-accent mr-3 flex-shrink-0">•</span>
+            <span>
+              <a href="https://github.com/backchainai/backchain-plugins" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-structure underline">github.com/backchainai/backchain-plugins</a>.
+              Portable skills conforming to the agentskills.io specification.
+            </span>
+          </li>
+          <li class="text-base text-structure flex items-start">
+            <span class="text-accent mr-3 flex-shrink-0">•</span>
+            <span>
+              <a href="https://github.com/backchainai/backchain-plugins/tree/main/advisors" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-structure underline">backchain-plugins/advisors</a>.
+              Multi-perspective evaluation plugin.
+            </span>
+          </li>
+          <li class="text-base text-structure flex items-start">
+            <span class="text-accent mr-3 flex-shrink-0">•</span>
+            <span>
+              <a href="https://github.com/backchainai/backchain-plugins/blob/main/advisors/evals/README.md" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-structure underline">advisors/evals/README.md</a>.
+              Open-source evaluation framework.
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

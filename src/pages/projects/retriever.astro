@@ -1,0 +1,126 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+---
+
+<BaseLayout
+  title="Retriever - Projects - Chris Krough"
+  description="Retriever: a RAG-powered Q&A system with source citations. Architecture of the retrieval stack, evaluation posture, and learnings."
+>
+  <Hero
+    headline="Retriever"
+    subheadline="RAG-powered Q&A with source citations. Hybrid search, FastAPI backend, SvelteKit frontend, pgvector store."
+  />
+
+  <!-- Problem -->
+  <section class="section-spacing">
+    <div class="container-wide">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-h2 font-heading font-semibold text-structure mb-4">Problem</h2>
+        <div class="space-y-4 text-base text-structure leading-relaxed">
+          <p>
+            Policy and procedure documents live scattered across wikis, shared drives, and PDFs. Keyword search returns noise; reading end-to-end takes hours. Retriever answers natural-language questions against a document corpus and returns answers with clickable source citations back into the original text.
+          </p>
+          <p>
+            The target user is an operational contributor (a shelter volunteer in the first deployment, generalizable to any organization with documentation) who needs a correct answer and a way to verify it in context.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Architecture -->
+  <section class="section-spacing bg-foundation-deep">
+    <div class="container-wide">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-h2 font-heading font-semibold text-structure mb-4">Architecture</h2>
+        <div class="space-y-6 text-base text-structure leading-relaxed">
+          <p>
+            Two pipelines share a single pgvector store. The document pipeline ingests, chunks, and embeds. The query pipeline retrieves, reranks, and synthesizes.
+          </p>
+          <pre class="bg-foundation-deep border border-border/40 rounded-lg p-6 text-sm text-structure overflow-x-auto leading-relaxed"><code>DOCUMENT PIPELINE
+[markdown/text] → [chunker] → [embeddings] → [pgvector]
+
+QUERY FLOW
+[question] → [hybrid search] → [rerank] → [LLM] → [answer + citations]
+
+SERVICES
+[SvelteKit @ Cloudflare Pages]
+          │
+          ▼
+[FastAPI @ Cloud Run] ───▶ [Supabase: Postgres + pgvector + Auth]
+          │
+          ▼
+[Cloudflare AI Gateway] ───▶ [OpenRouter LLM] + [OpenAI embeddings]
+</code></pre>
+          <p>
+            Retrieval is hybrid: HNSW cosine over embeddings for semantic match, GIN full-text for lexical match, then a rerank pass. Embeddings are OpenAI's <code class="text-sm bg-foundation px-1.5 py-0.5 rounded">text-embedding-3-small</code>. The LLM is routed through OpenRouter so the generation provider is a config change.
+          </p>
+          <p>
+            Every LLM and embedding call goes through Cloudflare AI Gateway for rate limiting, caching, and request logging. Application code talks to the gateway; the gateway handles the vendor SDKs. Auth is Supabase with row-level security. Observability is structlog JSON plus OpenTelemetry plus Langfuse for LLM tracing.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Evaluation -->
+  <section class="section-spacing">
+    <div class="container-wide">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-h2 font-heading font-semibold text-structure mb-4">Evaluation</h2>
+        <div class="space-y-4 text-base text-structure leading-relaxed">
+          <p>
+            Retriever does not publish a benchmark of the scale that <a href="/projects/advisors" class="text-accent hover:text-structure underline">Advisors</a> does. Retrieval quality for a specific corpus is measured against that corpus, and the serious evaluation work lives alongside the deployed instance rather than the open-source repo.
+          </p>
+          <p>
+            What is in the repo: citation-grounded answers (every response renders the exact passage the model drew from), built-in content moderation, and hallucination detection on the synthesis step. The eval posture for this class of system is per-deployment answer-quality review against a gold set of questions drawn from the real document corpus.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Learnings -->
+  <section class="section-spacing bg-foundation-deep">
+    <div class="container-wide">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-h2 font-heading font-semibold text-structure mb-4">Three learnings</h2>
+
+        <ol class="space-y-6">
+          <li class="text-base text-structure leading-relaxed">
+            <span class="text-accent font-medium">1.</span> Lexical-only search misses paraphrases; semantic-only search returns plausible but wrong passages on policy documents that share vocabulary across unrelated topics. Hybrid retrieval (HNSW cosine plus GIN full-text, both scored into the rerank) is the minimum viable stack for this content type. Dropping either side degrades recall or precision depending on how the question is phrased.
+          </li>
+          <li class="text-base text-structure leading-relaxed">
+            <span class="text-accent font-medium">2.</span> Citations are the contract between the system and the user. Users trust the answer only when they can click into the original document and verify the passage in context. Any RAG system without visible, verifiable citations is a demo.
+          </li>
+          <li class="text-base text-structure leading-relaxed">
+            <span class="text-accent font-medium">3.</span> Routing every LLM and embedding call through Cloudflare AI Gateway rather than direct vendor SDKs added an extra network hop. It also made model swaps, provider fallbacks, rate limiting, and request-level observability a config change. I traded a small amount of latency for operational leverage, and the tradeoff has not been close.
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- Links -->
+  <section class="section-spacing">
+    <div class="container-wide">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-h2 font-heading font-semibold text-structure mb-8">Links</h2>
+
+        <ul class="space-y-3">
+          <li class="text-base text-structure flex items-start">
+            <span class="text-accent mr-3 flex-shrink-0">•</span>
+            <span>
+              <a href="https://github.com/ckrough/retriever" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-structure underline">github.com/ckrough/retriever</a>. Source, architecture docs, and deployment guide.
+            </span>
+          </li>
+          <li class="text-base text-structure flex items-start">
+            <span class="text-accent mr-3 flex-shrink-0">•</span>
+            <a href="/projects" class="text-accent hover:text-structure underline">Back to projects</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

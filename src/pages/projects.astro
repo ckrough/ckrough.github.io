@@ -21,34 +21,29 @@ import ProjectCard from '../components/ProjectCard.astro';
         <!-- Retriever (Featured) -->
         <ProjectCard
           name="Retriever"
-          description="RAG-powered Q&A system with source citations and answer verification. Includes evaluation framework to measure retrieval quality over time. Document ingestion, vector search, and LLM-based synthesis."
-          techStack={['Python', 'Vector DB', 'FastAPI', 'OpenAI', 'Anthropic']}
+          description="RAG-powered Q&A system with source citations. Hybrid search (semantic + lexical) over markdown and text documents, answers routed through Cloudflare AI Gateway, FastAPI backend, SvelteKit frontend."
+          techStack={['Python', 'FastAPI', 'pgvector', 'SvelteKit', 'Supabase', 'Cloudflare AI Gateway']}
           githubUrl="https://github.com/ckrough/retriever"
+          detailUrl="/projects/retriever"
           featured={true}
         />
 
         <!-- Drover -->
         <ProjectCard
           name="Drover"
-          description="AI-powered document classification using LLMs. Automatically categorizes and routes documents based on content. Supports multiple LLM providers (Ollama, OpenAI, Anthropic) with configurable classification taxonomies and confidence thresholds."
-          techStack={['Python', 'FastAPI', 'Ollama', 'OpenAI', 'Anthropic', 'Pydantic']}
+          description="AI-powered document classifier that herds files into organized folders. 7-step chain-of-thought classification, NARA-compliant naming, multi-provider (Ollama, OpenAI, Anthropic, OpenRouter) with local-first default."
+          techStack={['Python', 'Click', 'LangChain', 'Ollama', 'Pydantic', 'structlog']}
           githubUrl="https://github.com/ckrough/drover"
+          detailUrl="/projects/drover"
         />
 
-        <!-- Agentspaces -->
+        <!-- Advisors -->
         <ProjectCard
-          name="Agentspaces"
-          description="Agentic development environment for managing multi-agent AI workflows. Isolated worktrees, dependency management, and CI integration. Production tooling for complex AI-assisted development projects requiring context persistence across sessions."
-          techStack={['Python', 'Git Worktrees', 'Claude AI', 'CLI Tools']}
-          githubUrl="https://github.com/ckrough/agentspaces"
-        />
-
-        <!-- Team of Rivals -->
-        <ProjectCard
-          name="Team of Rivals"
-          description="Claude AI Skill Showcase: Strategic decision-assistance framework inspired by Abraham Lincoln's 'Team of Rivals' approach, implemented as Claude AI Skills. Get diverse, adversarial perspectives on your decisions instead of a single AI viewpoint."
-          techStack={['Multi-Agent Orchestration', 'Claude Skills', 'AI Agents']}
-          githubUrl="https://github.com/ckrough/team-of-rivals"
+          name="Advisors"
+          description="Panel of role-specific Claude skills (Visionary, Skeptic, Operator, Ethicist) that argue from focused perspectives and disagree on purpose. Orchestrator synthesizes their outputs. Conforms to the agentskills.io specification. Includes an open evaluation framework."
+          techStack={['Claude Skills', 'agentskills.io', 'Multi-Agent Orchestration', 'LLM Evaluation']}
+          githubUrl="https://github.com/backchainai/backchain-plugins/tree/main/advisors"
+          detailUrl="/projects/advisors"
         />
       </div>
     </div>
