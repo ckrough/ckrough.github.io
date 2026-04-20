@@ -1,0 +1,65 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const notes = await getCollection('notes', ({ data }) => !data.draft);
+  return notes.map((note) => ({
+    params: { slug: note.slug },
+    props: { note },
+  }));
+}
+
+const { note } = Astro.props;
+const { Content } = await note.render();
+
+const formatDate = (date: Date) =>
+  date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    timeZone: 'UTC',
+  });
+---
+
+<BaseLayout title={`${note.data.title} - Chris Krough`} description={note.data.description}>
+  <section class="section-spacing">
+    <div class="container-wide">
+      <article class="max-w-3xl mx-auto">
+        <header class="mb-8">
+          <h1 class="text-h1 font-heading font-semibold text-structure mb-4">
+            {note.data.title}
+          </h1>
+          <div class="accent-bar mb-4"></div>
+          <p class="text-sm text-muted">
+            <time datetime={note.data.pubDate.toISOString()}>
+              {formatDate(note.data.pubDate)}
+            </time>
+            {
+              note.data.updatedDate && (
+                <>
+                  {' '}· Updated{' '}
+                  <time datetime={note.data.updatedDate.toISOString()}>
+                    {formatDate(note.data.updatedDate)}
+                  </time>
+                </>
+              )
+            }
+          </p>
+        </header>
+
+        <div class="notes-content">
+          <Content />
+        </div>
+
+        <footer class="mt-2xl pt-lg border-t border-border">
+          <p class="text-sm text-muted">
+            <a href="/notes" class="text-accent hover:text-structure underline">
+              ← All notes
+            </a>
+          </p>
+        </footer>
+      </article>
+    </div>
+  </section>
+</BaseLayout>
