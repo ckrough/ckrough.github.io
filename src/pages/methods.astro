@@ -7,11 +7,11 @@ import ServiceCard from '../components/ServiceCard.astro';
 
 <BaseLayout
   title="Methods - Chris Krough"
-  description="How I build with agentic workflows in production: harness engineering, evaluation, multi-instance coordination, MCP fluency. Public artifacts included."
+  description="How I build production systems: harness engineering, evaluation, and multi-instance coordination. Public artifacts included."
 >
   <Hero
     headline="Methods"
-    subheadline="How I build with agentic workflows in production: harness engineering, evaluation, and multi-instance coordination."
+    subheadline="How I build production systems: harness engineering, evaluation, and multi-instance coordination."
   />
 
   <!-- §2 Harness engineering -->
@@ -20,7 +20,7 @@ import ServiceCard from '../components/ServiceCard.astro';
       <div class="max-w-4xl mx-auto">
         <h2 class="text-h2 font-heading font-semibold text-structure mb-4">Harness engineering</h2>
         <p class="text-base text-muted mb-8 max-w-3xl">
-          I treat the agentic harness as configurable infrastructure I can tune at every layer. Three patterns do most of the work.
+          I treat my harness (the runtime coordinating agent work) as configurable infrastructure I can tune at every layer. Three patterns do most of the work.
         </p>
 
         <div class="space-y-6">
@@ -170,43 +170,8 @@ import ServiceCard from '../components/ServiceCard.astro';
     </div>
   </section>
 
-  <!-- §6 MCP server fluency -->
+  <!-- §6 Published work -->
   <section class="section-spacing bg-foundation-deep">
-    <div class="container-wide">
-      <div class="max-w-4xl mx-auto">
-        <h2 class="text-h2 font-heading font-semibold text-structure mb-4">MCP server fluency</h2>
-        <p class="text-base text-muted mb-8 max-w-3xl">
-          MCP is where most of my leverage comes from. The servers I rely on in production:
-        </p>
-
-        <ul class="space-y-3 mb-6">
-          <li class="text-base text-structure flex items-start">
-            <span class="text-accent mr-3 flex-shrink-0">•</span>
-            <span><strong class="font-medium">Docling:</strong> DOCX fidelity for document-heavy workflows (python-docx mangles tracked changes).</span>
-          </li>
-          <li class="text-base text-structure flex items-start">
-            <span class="text-accent mr-3 flex-shrink-0">•</span>
-            <span><strong class="font-medium">Playwright:</strong> validates generated UIs before I let the agent commit.</span>
-          </li>
-          <li class="text-base text-structure flex items-start">
-            <span class="text-accent mr-3 flex-shrink-0">•</span>
-            <span><strong class="font-medium">Gmail and GitHub:</strong> the loop runs against the work queues I use day-to-day.</span>
-          </li>
-          <li class="text-base text-structure flex items-start">
-            <span class="text-accent mr-3 flex-shrink-0">•</span>
-            <span><strong class="font-medium">First-party vendor plugins:</strong> integrations for the harness's native skills and workflows.</span>
-          </li>
-        </ul>
-
-        <p class="text-base text-structure leading-relaxed max-w-3xl">
-          I adopt upstream harness features (lifecycle hooks, subagents, plugins, new MCP servers) within weeks of release.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- §7 Published work -->
-  <section class="section-spacing">
     <div class="container-wide">
       <div class="max-w-4xl mx-auto">
         <h2 class="text-h2 font-heading font-semibold text-structure mb-8">Published work</h2>
