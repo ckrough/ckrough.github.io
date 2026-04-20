@@ -22,7 +22,7 @@ import Hero from '../../components/Hero.astro';
             Policy and procedure documents live scattered across wikis, shared drives, and PDFs. Keyword search returns noise; reading end-to-end takes hours. Retriever answers natural-language questions against a document corpus and returns answers with clickable source citations back into the original text.
           </p>
           <p>
-            The target user is an operational contributor (a shelter volunteer in the first deployment, generalizable to any organization with documentation) who needs a correct answer and a way to verify it, not a demo.
+            The target user is an operational contributor (a shelter volunteer in the first deployment, generalizable to any organization with documentation) who needs a correct answer and a way to verify it in context.
           </p>
         </div>
       </div>
@@ -54,10 +54,10 @@ SERVICES
 [Cloudflare AI Gateway] ───▶ [OpenRouter LLM] + [OpenAI embeddings]
 </code></pre>
           <p>
-            Retrieval is hybrid: HNSW cosine over embeddings for semantic match, GIN full-text for lexical match, then a rerank pass. Embeddings are OpenAI's <code class="text-sm bg-foundation px-1.5 py-0.5 rounded">text-embedding-3-small</code>. The LLM is routed through OpenRouter so the generation provider is a config change, not a deploy.
+            Retrieval is hybrid: HNSW cosine over embeddings for semantic match, GIN full-text for lexical match, then a rerank pass. Embeddings are OpenAI's <code class="text-sm bg-foundation px-1.5 py-0.5 rounded">text-embedding-3-small</code>. The LLM is routed through OpenRouter so the generation provider is a config change.
           </p>
           <p>
-            Every LLM and embedding call goes through Cloudflare AI Gateway for rate limiting, caching, and request logging. Application code talks to the gateway, not to vendor SDKs directly. Auth is Supabase with row-level security. Observability is structlog JSON plus OpenTelemetry plus Langfuse for LLM tracing.
+            Every LLM and embedding call goes through Cloudflare AI Gateway for rate limiting, caching, and request logging. Application code talks to the gateway; the gateway handles the vendor SDKs. Auth is Supabase with row-level security. Observability is structlog JSON plus OpenTelemetry plus Langfuse for LLM tracing.
           </p>
         </div>
       </div>
@@ -71,10 +71,10 @@ SERVICES
         <h2 class="text-h2 font-heading font-semibold text-structure mb-4">Evaluation</h2>
         <div class="space-y-4 text-base text-structure leading-relaxed">
           <p>
-            Retriever does not publish a benchmark of the scale that <a href="/projects/advisors" class="text-accent hover:text-structure underline">Advisors</a> does. Retrieval quality for a specific corpus is measured against that corpus, not a public suite, and the serious evaluation work lives alongside the deployed instance rather than the open-source repo.
+            Retriever does not publish a benchmark of the scale that <a href="/projects/advisors" class="text-accent hover:text-structure underline">Advisors</a> does. Retrieval quality for a specific corpus is measured against that corpus, and the serious evaluation work lives alongside the deployed instance rather than the open-source repo.
           </p>
           <p>
-            What is in the repo: citation-grounded answers (every response renders the exact passage the model drew from), built-in content moderation, and hallucination detection on the synthesis step. The eval posture for this class of system is per-deployment answer-quality review against a gold set of questions drawn from the real document corpus, not a one-shot public number.
+            What is in the repo: citation-grounded answers (every response renders the exact passage the model drew from), built-in content moderation, and hallucination detection on the synthesis step. The eval posture for this class of system is per-deployment answer-quality review against a gold set of questions drawn from the real document corpus.
           </p>
         </div>
       </div>
@@ -92,7 +92,7 @@ SERVICES
             <span class="text-accent font-medium">1.</span> Lexical-only search misses paraphrases; semantic-only search returns plausible but wrong passages on policy documents that share vocabulary across unrelated topics. Hybrid retrieval (HNSW cosine plus GIN full-text, both scored into the rerank) is the minimum viable stack for this content type. Dropping either side degrades recall or precision depending on how the question is phrased.
           </li>
           <li class="text-base text-structure leading-relaxed">
-            <span class="text-accent font-medium">2.</span> Citations are not a feature, they are the contract. Users trust the answer only when they can click into the original document and verify the passage in context. Any RAG system without visible, verifiable citations is a demo.
+            <span class="text-accent font-medium">2.</span> Citations are the contract between the system and the user. Users trust the answer only when they can click into the original document and verify the passage in context. Any RAG system without visible, verifiable citations is a demo.
           </li>
           <li class="text-base text-structure leading-relaxed">
             <span class="text-accent font-medium">3.</span> Routing every LLM and embedding call through Cloudflare AI Gateway rather than direct vendor SDKs added an extra network hop. It also made model swaps, provider fallbacks, rate limiting, and request-level observability a config change. I traded a small amount of latency for operational leverage, and the tradeoff has not been close.

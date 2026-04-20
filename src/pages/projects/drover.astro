@@ -93,10 +93,10 @@ import Card from '../../components/Card.astro';
             <span class="text-accent font-medium">1.</span> Naive "classify this document" prompts hit a ceiling. Explicit numbered reasoning (extract, date priority, doctype, domain, vendor, subject) inside <code class="text-sm bg-foundation px-1.5 py-0.5 rounded">&lt;classification_analysis&gt;</code> tags pushed accuracy roughly seventeen points and, more importantly, made failures debuggable. The reasoning output is the debug log.
           </li>
           <li class="text-base text-structure leading-relaxed">
-            <span class="text-accent font-medium">2.</span> The hardest classification call is not domain, it is distinguishing fundamental purpose from transactional use. A bank statement used for taxes is still a bank statement. The taxonomy rules had to spell that out explicitly ("classify by fundamental purpose, not how the document is used"). Without the rule, the classifier drifts toward whatever labels the user's recent folders suggest.
+            <span class="text-accent font-medium">2.</span> The hardest classification call is distinguishing fundamental purpose from transactional use. A bank statement used for taxes is still a bank statement. The taxonomy rules had to spell that out explicitly ("classify by fundamental purpose, not how the document is used"). Without the rule, the classifier drifts toward whatever labels the user's recent folders suggest.
           </li>
           <li class="text-base text-structure leading-relaxed">
-            <span class="text-accent font-medium">3.</span> Privacy-first was non-negotiable for the use case. Financial and medical documents should not need to leave the device to get a filing suggestion. Multi-provider support exists so users can trade off accuracy against privacy on purpose, not so the default hits an API.
+            <span class="text-accent font-medium">3.</span> Privacy-first was non-negotiable for the use case. Financial and medical documents should not need to leave the device to get a filing suggestion. Multi-provider support exists so users can trade off accuracy against privacy on purpose. The default keeps data on the device.
           </li>
         </ol>
       </div>

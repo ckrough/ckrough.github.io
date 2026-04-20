@@ -28,7 +28,7 @@ The grader returns structured JSON enforced by `--json-schema`. No regex scrapin
 
 Ambient state pollutes measurement. If my user-level `CLAUDE.md` loads during a run, the with-skill arm inherits rules the baseline never sees. The skill looks better than it is, and the result does not reproduce for anyone else.
 
-`claude --bare` strips that off. No hooks, no plugins, no `CLAUDE.md` auto-discovery. The skill under test is loaded explicitly. The baseline gets nothing. What lands in the transcript is attributable to the two prompts and the skill definition, not my local setup.
+`claude --bare` strips that off. No hooks, no plugins, no `CLAUDE.md` auto-discovery. The skill under test is loaded explicitly. The baseline gets nothing. What lands in the transcript is attributable to the two prompts and the skill definition alone.
 
 ## The numbers
 
@@ -45,7 +45,7 @@ The gap is 51 points. The harness writes results to a gitignored directory by de
 
 Two things stood out.
 
-First, the baseline was not uniformly weak. It passed several assertions cleanly. It failed on the ones that demanded structured multi-perspective reasoning, which is exactly what Advisors adds. That is the clearest signal the skill does the work the rubric asks about, not just pads the response.
+First, the baseline was not uniformly weak. It passed several assertions cleanly. It failed on the ones that demanded structured multi-perspective reasoning, which is exactly what Advisors adds. That is the clearest signal the skill does the work the rubric asks about.
 
 Second, zero parse failures across 60 trials means the JSON-schema-enforced grader is stable enough to trust pass-rate deltas below ten points. Without that floor, small improvements would sink into noise.
 

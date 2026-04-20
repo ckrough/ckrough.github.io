@@ -20,13 +20,13 @@ import ServiceCard from '../components/ServiceCard.astro';
       <div class="max-w-4xl mx-auto">
         <h2 class="text-h2 font-heading font-semibold text-structure mb-4">Harness engineering</h2>
         <p class="text-base text-muted mb-8 max-w-3xl">
-          I treat the agentic harness as configurable infrastructure, not a black box. Three patterns do most of the work.
+          I treat the agentic harness as configurable infrastructure I can tune at every layer. Three patterns do most of the work.
         </p>
 
         <div class="space-y-6">
           <ServiceCard
             title="Lifecycle hooks"
-            description="I use hooks to catch unsafe tool calls before they run, hand off follow-up work to the right subagent, and reload project conventions after the runtime compacts a long session. The policy lives in config, not in the prompt."
+            description="I use hooks to catch unsafe tool calls before they run, hand off follow-up work to the right subagent, and reload project conventions after the runtime compacts a long session. The policy lives in config where I can audit and version it."
             items={[
               'Pre-action hooks reject unsafe edits before they hit the filesystem or network.',
               'Post-action hooks route the next step to the appropriate skill or subagent.',
@@ -36,7 +36,7 @@ import ServiceCard from '../components/ServiceCard.astro';
 
           <ServiceCard
             title="Scoped subagents"
-            description="I split work across subagents scoped by role (reviewer, planner, implementer, auditor) and give each one only the tools its role needs. If the reviewer does not have write access, it cannot write. The boundary is in config, not in the prompt."
+            description="I split work across subagents scoped by role (reviewer, planner, implementer, auditor) and give each one only the tools its role needs. If the reviewer does not have write access, it cannot write. The boundary is declared in config and enforced by the harness."
             items={[
               'Correctness: a subagent cannot invoke tools outside its mandate.',
               'Speed: smaller tool surfaces produce faster, more focused outputs.',
@@ -90,7 +90,7 @@ import ServiceCard from '../components/ServiceCard.astro';
 
           <ServiceCard
             title="Rules, standards, references"
-            description="My rules are thin and always loaded: naming, git workflow, issue tracking, voice. Standards and references hold the depth (registries, specs, tables) and only load when a skill asks for them. Context stays compact until depth matters."
+            description="My rules are thin and always loaded: naming, git workflow, issue tracking, voice. Standards and references hold the depth (registries, specs, tables) and only load when a skill asks for them."
             items={[
               'Rules: always loaded, one topic per file.',
               'Standards: full registries and specifications, loaded on demand.',
@@ -190,7 +190,7 @@ import ServiceCard from '../components/ServiceCard.astro';
           </li>
           <li class="text-base text-structure flex items-start">
             <span class="text-accent mr-3 flex-shrink-0">•</span>
-            <span><strong class="font-medium">Gmail and GitHub:</strong> the loop runs against real work queues, not fixtures.</span>
+            <span><strong class="font-medium">Gmail and GitHub:</strong> the loop runs against the work queues I use day-to-day.</span>
           </li>
           <li class="text-base text-structure flex items-start">
             <span class="text-accent mr-3 flex-shrink-0">•</span>
