@@ -21,26 +21,29 @@ import ProjectCard from '../components/ProjectCard.astro';
         <!-- Retriever (Featured) -->
         <ProjectCard
           name="Retriever"
-          description="RAG-powered Q&A system with source citations and answer verification. Includes evaluation framework to measure retrieval quality over time. Document ingestion, vector search, and LLM-based synthesis."
-          techStack={['Python', 'Vector DB', 'FastAPI', 'OpenAI', 'Anthropic']}
+          description="RAG-powered Q&A system with source citations. Hybrid search (semantic + lexical) over markdown and text documents, answers routed through Cloudflare AI Gateway, FastAPI backend, SvelteKit frontend."
+          techStack={['Python', 'FastAPI', 'pgvector', 'SvelteKit', 'Supabase', 'Cloudflare AI Gateway']}
           githubUrl="https://github.com/ckrough/retriever"
+          detailUrl="/projects/retriever"
           featured={true}
         />
 
         <!-- Drover -->
         <ProjectCard
           name="Drover"
-          description="AI-powered document classification using LLMs. Automatically categorizes and routes documents based on content. Supports multiple LLM providers (Ollama, OpenAI, Anthropic) with configurable classification taxonomies and confidence thresholds."
-          techStack={['Python', 'FastAPI', 'Ollama', 'OpenAI', 'Anthropic', 'Pydantic']}
+          description="AI-powered document classifier that herds files into organized folders. 7-step chain-of-thought classification, NARA-compliant naming, multi-provider (Ollama, OpenAI, Anthropic, OpenRouter) with local-first default."
+          techStack={['Python', 'Click', 'LangChain', 'Ollama', 'Pydantic', 'structlog']}
           githubUrl="https://github.com/ckrough/drover"
+          detailUrl="/projects/drover"
         />
 
         <!-- Advisors -->
         <ProjectCard
           name="Advisors"
-          description="Strategic decision-assistance skill that provides adversarial, multi-perspective analysis to balance the LLM's typically single viewpoint. Conforms to the [agentskills.io](https://agentskills.io/) specification for portable, harness-independent skills. Includes an executable evaluation framework that scores skill outputs against assertions using LLM-as-judge, with each run executed in clean-room isolation to prevent leakage from local context and configuration."
-          techStack={['Multi-Agent Orchestration', 'Claude Skills', 'agentskills.io', 'LLM Evaluation']}
+          description="Panel of role-specific Claude skills (Visionary, Skeptic, Operator, Ethicist) that argue from focused perspectives and disagree on purpose. Orchestrator synthesizes their outputs. Conforms to the agentskills.io specification. Includes an open evaluation framework."
+          techStack={['Claude Skills', 'agentskills.io', 'Multi-Agent Orchestration', 'LLM Evaluation']}
           githubUrl="https://github.com/backchainai/backchain-plugins/tree/main/advisors"
+          detailUrl="/projects/advisors"
         />
       </div>
     </div>

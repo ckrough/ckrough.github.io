@@ -1,0 +1,153 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import Card from '../../components/Card.astro';
+---
+
+<BaseLayout
+  title="Advisors - Projects - Chris Krough"
+  description="Advisors: a panel of role-specific Claude skills that argue from focused perspectives. Architecture, evaluation framework, and learnings."
+>
+  <Hero
+    headline="Advisors"
+    subheadline="A panel of role-specific skills that argue from focused perspectives and disagree on purpose."
+  />
+
+  <!-- Problem -->
+  <section class="section-spacing">
+    <div class="container-wide">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-h2 font-heading font-semibold text-structure mb-4">Problem</h2>
+        <div class="space-y-4 text-base text-structure leading-relaxed">
+          <p>
+            Assistants default to agreement. Most strategic decisions do not need another voice confirming the user's instinct, they need a panel that will push back. Advisors is a set of five Claude skills modeled on Lincoln's cabinet pattern: appoint your sharpest opponents, not loyalists, and let them disagree in the room.
+          </p>
+          <p>
+            Four role-specific advisors (Visionary, Skeptic, Operator, Ethicist) each analyze the same decision through a fixed lens. An orchestrator runs them in parallel and compresses their outputs into a single recommendation with explicit areas of agreement and disagreement.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Architecture -->
+  <section class="section-spacing bg-foundation-deep">
+    <div class="container-wide">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-h2 font-heading font-semibold text-structure mb-4">Architecture</h2>
+        <div class="space-y-6 text-base text-structure leading-relaxed">
+          <p>
+            Five skills conforming to the <a href="https://agentskills.io/specification" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-structure underline">agentskills.io specification</a>: four individual advisors plus an orchestrator (<code class="text-sm bg-foundation px-1.5 py-0.5 rounded">advisory-panel</code>). Each advisor is a self-contained skill with its own system prompt, evaluation rubric, and example set. They are portable across any harness that implements the spec.
+          </p>
+          <pre class="bg-foundation-deep border border-border/40 rounded-lg p-6 text-sm text-structure overflow-x-auto leading-relaxed"><code>                  [user prompt]
+                        │
+                        ▼
+              ┌──advisory-panel──┐
+              │   orchestrator   │
+              └────────┬─────────┘
+                       │
+        ┌──────┬───────┼───────┬──────┐
+        ▼      ▼       ▼       ▼
+   visionary skeptic operator ethicist
+        │      │       │       │
+        └──────┴───┬───┴───────┘
+                  ▼
+           synthesis pass
+                  │
+                  ▼
+     [agreement]  [disagreement]
+     [risk-adjusted recommendation]
+</code></pre>
+          <p>
+            The panel launches the four advisors as independent subagents, waits for all of them to finish, then runs a synthesis pass over the collected outputs. The synthesis pass is where the hard work happens: compressing four long analyses into the three output sections without flattening the disagreements that make the panel useful.
+          </p>
+          <p>
+            Each advisor can also be invoked on its own (<code class="text-sm bg-foundation px-1.5 py-0.5 rounded">/advisor-skeptic</code>, <code class="text-sm bg-foundation px-1.5 py-0.5 rounded">/advisor-operator</code>, and so on) for focused analysis from a single perspective.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Evaluation -->
+  <section class="section-spacing">
+    <div class="container-wide">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-h2 font-heading font-semibold text-structure mb-4">Evaluation</h2>
+        <div class="space-y-4 text-base text-structure leading-relaxed">
+          <p>
+            Every skill ships with an <code class="text-sm bg-foundation px-1.5 py-0.5 rounded">evals.json</code> defining per-assertion pass/fail criteria against three shared scenarios (personal career decision, small-business technology adoption, B2B SaaS strategic pivot). An LLM-as-judge grades each output with structured JSON output.
+          </p>
+          <p>
+            Every trial runs twice per scenario: once with the skill injected as the system prompt, once against a baseline prompt. Both run through <code class="text-sm bg-foundation px-1.5 py-0.5 rounded">claude --bare</code> so hooks, plugins, and CLAUDE.md auto-discovery do not leak into the measurement. Iterations are keyed by git shorthash, with a <code class="text-sm bg-foundation px-1.5 py-0.5 rounded">-dirty</code> suffix when skill files have uncommitted changes.
+          </p>
+        </div>
+
+        <Card variant="default" class="mt-8">
+          <h3 class="text-h3 font-heading font-medium text-structure mb-3">Published result</h3>
+          <p class="text-base text-structure leading-relaxed mb-3">
+            The advisory panel scored 96% against the rubric. The bare-prompt baseline scored 45%. 60 graded trials per release, zero parse failures. The runner, rubric, and per-assertion evidence are in the public repo.
+          </p>
+          <p class="text-base text-muted">
+            <a href="https://github.com/backchainai/backchain-plugins/blob/main/advisors/evals/README.md" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-structure underline">Evaluation framework and method (README)</a>
+          </p>
+        </Card>
+      </div>
+    </div>
+  </section>
+
+  <!-- Learnings -->
+  <section class="section-spacing bg-foundation-deep">
+    <div class="container-wide">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-h2 font-heading font-semibold text-structure mb-4">Three learnings</h2>
+
+        <ol class="space-y-6">
+          <li class="text-base text-structure leading-relaxed">
+            <span class="text-accent font-medium">1.</span> The single-skill evaluation pattern in the agentskills.io spec is not enough for a multi-skill plugin. I extended it with two cross-cutting analyses: perspective diversity (are the four advisors actually producing distinct takes, or converging?) and panel coherence (does orchestration degrade the quality of individual advisor outputs?). Both are gaps the spec does not cover, and both needed their own file formats under <code class="text-sm bg-foundation px-1.5 py-0.5 rounded">analysis/</code>.
+          </li>
+          <li class="text-base text-structure leading-relaxed">
+            <span class="text-accent font-medium">2.</span> Clean-room isolation is the difference between measuring the skill and measuring the harness. Running trials through <code class="text-sm bg-foundation px-1.5 py-0.5 rounded">claude --bare</code> strips hooks, plugins, and CLAUDE.md auto-discovery so only the skill's contribution shows up in the grade. Any eval that runs inside the same runtime configuration the developer uses is measuring both.
+          </li>
+          <li class="text-base text-structure leading-relaxed">
+            <span class="text-accent font-medium">3.</span> Synthesis is harder than the advisors. Any decent role-scoped prompt produces a plausible take. The difficult work is compressing four long analyses into agreement, disagreement, and a risk-adjusted verdict without softening the disagreements. Most synthesis iterations failed by collapsing the four voices into consensus that did not exist.
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- Links -->
+  <section class="section-spacing">
+    <div class="container-wide">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-h2 font-heading font-semibold text-structure mb-8">Links</h2>
+
+        <ul class="space-y-3">
+          <li class="text-base text-structure flex items-start">
+            <span class="text-accent mr-3 flex-shrink-0">•</span>
+            <span>
+              <a href="https://github.com/backchainai/backchain-plugins/tree/main/advisors" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-structure underline">backchain-plugins/advisors</a>. The five skills and their evaluation harness.
+            </span>
+          </li>
+          <li class="text-base text-structure flex items-start">
+            <span class="text-accent mr-3 flex-shrink-0">•</span>
+            <span>
+              <a href="https://github.com/backchainai/backchain-plugins/blob/main/advisors/evals/README.md" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-structure underline">advisors/evals/README.md</a>. Evaluation framework, scenarios, and CLI.
+            </span>
+          </li>
+          <li class="text-base text-structure flex items-start">
+            <span class="text-accent mr-3 flex-shrink-0">•</span>
+            <span>
+              <a href="https://agentskills.io/specification" target="_blank" rel="noopener noreferrer" class="text-accent hover:text-structure underline">agentskills.io specification</a>. The portable-skills standard the plugin conforms to.
+            </span>
+          </li>
+          <li class="text-base text-structure flex items-start">
+            <span class="text-accent mr-3 flex-shrink-0">•</span>
+            <a href="/projects" class="text-accent hover:text-structure underline">Back to projects</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
