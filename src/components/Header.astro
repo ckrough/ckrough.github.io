@@ -1,12 +1,11 @@
 ---
 const navItems = [
   { label: 'Home', href: '/' },
-  { label: 'Services', href: '/services' },
-  { label: 'Methods', href: '/methods' },
-  { label: 'Notes', href: '/notes' },
-  { label: 'Projects', href: '/projects' },
   { label: 'Experience', href: '/experience' },
-  { label: 'References', href: '/references' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'Notes', href: '/notes' },
+  { label: 'Inspiration', href: '/inspiration' },
+  { label: 'Methods', href: '/methods' },
   { label: 'Contact', href: '/contact' },
 ];
 
@@ -19,7 +18,7 @@ const currentPath = Astro.url.pathname;
       <!-- Logo / Name -->
       <a
         href="/"
-        class="text-2xl font-heading font-semibold text-structure hover:text-accent transition-colors no-underline hover:no-underline"
+        class="text-lg md:text-xl font-heading font-semibold text-structure hover:text-accent transition-colors no-underline hover:no-underline whitespace-nowrap"
       >
         Chris Krough
       </a>
