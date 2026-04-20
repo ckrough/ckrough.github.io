@@ -1,6 +1,5 @@
 ---
 const navItems = [
-  { label: 'Home', href: '/' },
   { label: 'Experience', href: '/experience' },
   { label: 'Projects', href: '/projects' },
   { label: 'Notes', href: '/notes' },
@@ -13,7 +12,7 @@ const currentPath = Astro.url.pathname;
 ---
 
 <header class="sticky top-0 bg-surface/95 backdrop-blur-sm border-b border-border/30 z-50">
-  <nav class="container-custom py-4">
+  <nav class="container-wide py-4">
     <div class="flex justify-between items-center">
       <!-- Logo / Name -->
       <a
