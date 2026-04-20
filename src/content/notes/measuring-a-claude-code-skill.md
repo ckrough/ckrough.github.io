@@ -1,17 +1,17 @@
 ---
-title: "Measuring a Claude Code skill: assertion-based LLM-as-judge with claude --bare"
+title: "Evaluating agent skill effectiveness"
 description: "A 60-trial A/B of the Advisors plugin against a no-skill baseline: 96% vs 45%, zero parse failures. Open harness, clean-room isolation, reproducible from a public repo."
 pubDate: 2026-04-20
 tags: [evaluation, claude-code, methods]
 ---
 
-When I release a new Claude Code skill, I want to know whether it made the output better or just changed it. Prompts have no ground truth, so "this feels sharper" is not a measurement. Running a skill twice and eyeballing the diff is worse: I pick the one I remember liking. I needed a harness that grades output against a fixed rubric and runs the same way every release.
+When I release a new agent skill, I want to know whether it made the output better or just changed it. Prompts have no ground truth, so "this feels better" is not a good measurement. Running a skill twice and eyeballing the diff is not a scalable or effective way to measure skill impact. You need a harness that grades output against a fixed rubric and runs the same way every release. Skill creation skills, like [Anthropic skill-creator](https://github.com/anthropics/skills/tree/main/skills/skill-creator) include basic prompt and scripts for generating evaluations and reports, but I wanted something closer to CI/CD and a structure that could handle eval for my multi-skill plugin.
 
-This post is how I measure the Advisors plugin. The harness and rubric are public, in [advisors/evals](https://github.com/backchainai/backchain-plugins/tree/main/advisors/evals). The method generalizes to any Claude Code skill.
+This post is how I evaluate the Advisors plugin. The harness and rubric are public, in [advisors/evals](https://github.com/backchainai/backchain-plugins/tree/main/advisors/evals). The method generalizes to any compound agentskills.io compatible skill.
 
 ## What I measure
 
-Two arms, same scenario:
+Two arms, against a common set of scenarios:
 
 - **With-skill.** Advisors plugin enabled, the scenario runs through the full advisory panel.
 - **Baseline.** Bare prompt, no plugin, no ambient context, same scenario.
@@ -26,9 +26,9 @@ The grader returns structured JSON enforced by `--json-schema`. No regex scrapin
 
 ## Clean-room isolation
 
-Ambient state pollutes measurement. If my user-level `CLAUDE.md` loads during a run, the with-skill arm inherits rules the baseline never sees. The skill looks better than it is, and the result does not reproduce for anyone else.
+Ambient context pollutes measurement. If my user-level `CLAUDE.md` loads during a run, the with-skill arm inherits rules the baseline never sees. The skill looks better than it is, and the result does not reproduce for anyone else.
 
-`claude --bare` strips that off. No hooks, no plugins, no `CLAUDE.md` auto-discovery. The skill under test is loaded explicitly. The baseline gets nothing. What lands in the transcript is attributable to the two prompts and the skill definition alone.
+`claude --bare` strips that off, disabling hooks, plugins, and `CLAUDE.md` auto-discovery. The skill under test is loaded explicitly. The baseline gets nothing. What lands in the transcript is attributable to the two prompts and the skill definition alone.
 
 ## The numbers
 
