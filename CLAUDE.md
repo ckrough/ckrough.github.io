@@ -52,3 +52,28 @@ Example: "I've led platform engineering through 4 acquisitions and 2 IPOs. Now I
 ## Deployment
 
 GitHub Actions deploys to GitHub Pages on push to `main`. Custom domain (`dev.krough.org`) configured via `public/CNAME`.
+
+## Adding a Note (Blog Post)
+
+Posts live in the `notes` content collection. Authoring is a single markdown file plus a git push.
+
+1. Create `src/content/notes/<slug>.md`. The filename becomes the URL: `/notes/<slug>`.
+2. Add frontmatter:
+
+   ```yaml
+   ---
+   title: "Post title"
+   description: "One- or two-sentence summary. Shown on the /notes index and in the RSS feed: write it for that purpose."
+   pubDate: 2026-05-04
+   updatedDate: 2026-05-10  # optional
+   tags: [evaluation, methods]  # optional
+   draft: false  # set true to author without publishing
+   ---
+   ```
+
+3. Write the body in standard markdown.
+4. Commit and push to `main`. GitHub Actions builds and deploys.
+
+Schema is enforced by Zod in `src/content/config.ts`. `astro check` (run by `npm run build`) catches schema violations before deploy.
+
+The `/notes` index groups posts by month. The RSS feed at `/rss.xml` mirrors the same set (drafts excluded). Tags render as chips on the index and post pages but do not yet have per-tag pages.
