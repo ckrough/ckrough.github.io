@@ -51,6 +51,14 @@ const imageURL = new URL(ogImage, Astro.site);
 
     <!-- Sitemap -->
     <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <!-- RSS -->
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Chris Krough - Notes"
+      href="/rss.xml"
+    />
   </head>
   <body class="min-h-screen flex flex-col">
     <Header />
